@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery | Vidya Coachings</title>
+    <meta name="description" content="Photo gallery of Vidya Coachings - students, alumni, achievements and campus memories in Badarpur & Jaitpur, Delhi.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="gallery.css">
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+</head>
+<body>
+<!-- HEADER -->
+<header id="header">
+    <div class="container">
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="Vidya Coachings" class="logo-img">
+                <span class="logo-text">Vidya <span>Coachings</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#programs">Programs</a></li>
+                <li><a href="gallery.html" class="active">Gallery</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <a href="index.html#contact" class="nav-btn"><i class="fas fa-home"></i> Back to Home</a>
+            <div class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#programs">Programs</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="index.html#contact" class="nav-btn" style="text-align:center;margin-top:8px;">Back to Home</a>
+</div>
+
+<!-- GALLERY HERO -->
+<section class="gallery-hero">
+    <div class="container">
+        <div class="gallery-hero-badge"><i class="fas fa-images"></i> Our Gallery</div>
+        <h1>Photo Gallery</h1>
+        <p>Memories, achievements and special moments at Vidya Coachings</p>
+        <div class="gallery-stats">
+            <div class="gallery-stat"><strong>200+</strong><span>All Photos</span></div>
+            <div class="gallery-stat"><strong>50+</strong><span>Students</span></div>
+            <div class="gallery-stat"><strong>10+</strong><span>Alumni</span></div>
+            <div class="gallery-stat"><strong>40+</strong><span>Achievements</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- STICKY TABS -->
+<div class="gallery-tabs-bar">
+    <div class="container">
+        <div class="gallery-tabs">
+            <button class="tab-btn active" data-section="all-photos"><i class="fas fa-images"></i> All Photos <span class="tab-count">200</span></button>
+            <button class="tab-btn" data-section="students"><i class="fas fa-user-graduate"></i> Students <span class="tab-count">50</span></button>
+            <button class="tab-btn" data-section="alumni"><i class="fas fa-medal"></i> Alumni <span class="tab-count">10</span></button>
+            <button class="tab-btn" data-section="achievements"><i class="fas fa-trophy"></i> Achievements <span class="tab-count">40</span></button>
+        </div>
+    </div>
+</div>
+
+<!-- PHOTO GALLERY -->
+<section class="gallery-section">
+    <div class="container">
+        
+        <!-- SECTION 1: ALL PHOTOS (Initially Visible) -->
+        <div class="section-block active" id="all-photos">
+            <h2 class="section-title">All Photos</h2>
+            <div class="photo-grid">
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo1.jpeg" alt="Photo 1">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo2.jpeg" alt="Photo 2">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo3.jpeg" alt="Photo 3">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo4.jpeg" alt="Photo 4">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo5.jpeg" alt="Photo 5">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo6.jpeg" alt="Photo 6">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo7.jpeg" alt="Photo 7">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo8.jpeg" alt="Photo 8">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo9.jpeg" alt="Photo 9">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo10.jpeg" alt="Photo 10">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo11.jpeg" alt="Photo 11">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo12.jpeg" alt="Photo 12">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo13.jpeg" alt="Photo 13">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo14.jpeg" alt="Photo 14">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo15.jpeg" alt="Photo 15">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo16.jpeg" alt="Photo 16">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo17.jpeg" alt="Photo 17">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo18.jpeg" alt="Photo 18">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo19.jpeg" alt="Photo 19">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo20.jpeg" alt="Photo 20">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo21.jpeg" alt="Photo 21">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo22.jpeg" alt="Photo 22">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo23.jpeg" alt="Photo 23">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo24.jpeg" alt="Photo 24">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo25.jpeg" alt="Photo 25">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo26.jpeg" alt="Photo 26">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo27.jpeg" alt="Photo 27">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo28.jpeg" alt="Photo 28">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo29.jpeg" alt="Photo 29">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo30.jpeg" alt="Photo 30">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo31.jpeg" alt="Photo 31">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo32.jpeg" alt="Photo 32">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo33.jpeg" alt="Photo 33">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo34.jpeg" alt="Photo 34">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo35.jpeg" alt="Photo 35">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo36.jpeg" alt="Photo 36">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo37.jpeg" alt="Photo 37">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo38.jpeg" alt="Photo 38">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo39.jpeg" alt="Photo 39">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo40.jpeg" alt="Photo 40">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo41.jpeg" alt="Photo 41">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo42.jpeg" alt="Photo 42">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo43.jpeg" alt="Photo 43">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo44.jpeg" alt="Photo 44">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo45.jpeg" alt="Photo 45">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo46.jpeg" alt="Photo 46">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo47.jpeg" alt="Photo 47">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo48.jpeg" alt="Photo 48">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo49.jpeg" alt="Photo 49">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo50.jpeg" alt="Photo 50">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo51.jpeg" alt="Photo 51">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo52.jpeg" alt="Photo 52">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo53.jpeg" alt="Photo 53">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo54.jpeg" alt="Photo 54">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo55.jpeg" alt="Photo 55">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo56.jpeg" alt="Photo 56">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo57.jpeg" alt="Photo 57">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo58.jpeg" alt="Photo 58">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo59.jpeg" alt="Photo 59">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo60.jpeg" alt="Photo 60">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo61.jpeg" alt="Photo 61">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo62.jpeg" alt="Photo 62">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo63.jpeg" alt="Photo 63">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo64.jpeg" alt="Photo 64">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo65.jpeg" alt="Photo 65">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo66.jpeg" alt="Photo 66">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo67.jpeg" alt="Photo 67">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo68.jpeg" alt="Photo 68">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo69.jpeg" alt="Photo 69">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo70.jpeg" alt="Photo 70">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo71.jpeg" alt="Photo 71">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo72.jpeg" alt="Photo 72">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo73.jpeg" alt="Photo 73">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo74.jpeg" alt="Photo 74">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo75.jpeg" alt="Photo 75">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo76.jpeg" alt="Photo 76">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo77.jpeg" alt="Photo 77">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo78.jpeg" alt="Photo 78">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo79.jpeg" alt="Photo 79">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo80.jpeg" alt="Photo 80">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo81.jpeg" alt="Photo 81">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo82.jpeg" alt="Photo 82">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo83.jpeg" alt="Photo 83">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo84.jpeg" alt="Photo 84">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo85.jpeg" alt="Photo 85">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo86.jpeg" alt="Photo 86">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo87.jpeg" alt="Photo 87">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo88.jpeg" alt="Photo 88">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo89.jpeg" alt="Photo 89">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo90.jpeg" alt="Photo 90">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo91.jpeg" alt="Photo 91">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo92.jpeg" alt="Photo 92">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo93.jpeg" alt="Photo 93">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo94.jpeg" alt="Photo 94">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo95.jpeg" alt="Photo 95">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo96.jpeg" alt="Photo 96">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo97.jpeg" alt="Photo 97">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo98.jpeg" alt="Photo 98">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo99.jpeg" alt="Photo 99">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo100.jpeg" alt="Photo 100">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo101.jpeg" alt="Photo 101">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo102.jpeg" alt="Photo 102">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo103.jpeg" alt="Photo 103">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo104.jpeg" alt="Photo 104">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo105.jpeg" alt="Photo 105">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo106.jpeg" alt="Photo 106">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo107.jpeg" alt="Photo 107">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo108.jpeg" alt="Photo 108">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo109.jpeg" alt="Photo 109">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo110.jpeg" alt="Photo 110">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo111.jpeg" alt="Photo 111">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo112.jpeg" alt="Photo 112">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo113.jpeg" alt="Photo 113">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo114.jpeg" alt="Photo 114">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo115.jpeg" alt="Photo 115">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo116.jpeg" alt="Photo 116">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo117.jpeg" alt="Photo 117">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo118.jpeg" alt="Photo 118">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo119.jpeg" alt="Photo 119">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo120.jpeg" alt="Photo 120">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo121.jpeg" alt="Photo 121">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo122.jpeg" alt="Photo 122">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo123.jpeg" alt="Photo 123">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo124.jpeg" alt="Photo 124">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo125.jpeg" alt="Photo 125">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo126.jpeg" alt="Photo 126">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo127.jpeg" alt="Photo 127">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo128.jpeg" alt="Photo 128">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo129.jpeg" alt="Photo 129">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo130.jpeg" alt="Photo 130">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo131.jpeg" alt="Photo 131">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo132.jpeg" alt="Photo 132">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo133.jpeg" alt="Photo 133">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo134.jpeg" alt="Photo 134">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo135.jpeg" alt="Photo 135">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo136.jpeg" alt="Photo 136">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo137.jpeg" alt="Photo 137">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo138.jpeg" alt="Photo 138">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo139.jpeg" alt="Photo 139">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo140.jpeg" alt="Photo 140">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo141.jpeg" alt="Photo 141">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo142.jpeg" alt="Photo 142">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo143.jpeg" alt="Photo 143">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo144.jpeg" alt="Photo 144">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo145.jpeg" alt="Photo 145">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo146.jpeg" alt="Photo 146">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo147.jpeg" alt="Photo 147">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo148.jpeg" alt="Photo 148">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo149.jpeg" alt="Photo 149">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo150.jpeg" alt="Photo 150">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo151.jpeg" alt="Photo 151">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo152.jpeg" alt="Photo 152">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo153.jpeg" alt="Photo 153">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo154.jpeg" alt="Photo 154">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo155.jpeg" alt="Photo 155">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo156.jpeg" alt="Photo 156">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo157.jpeg" alt="Photo 157">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo158.jpeg" alt="Photo 158">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo159.jpeg" alt="Photo 159">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo160.jpeg" alt="Photo 160">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo161.jpeg" alt="Photo 161">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo162.jpeg" alt="Photo 162">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo163.jpeg" alt="Photo 163">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo164.jpeg" alt="Photo 164">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo165.jpeg" alt="Photo 165">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo166.jpeg" alt="Photo 166">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo167.jpeg" alt="Photo 167">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo168.jpeg" alt="Photo 168">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo169.jpeg" alt="Photo 169">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo170.jpeg" alt="Photo 170">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo171.jpeg" alt="Photo 171">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo172.jpeg" alt="Photo 172">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo173.jpeg" alt="Photo 173">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo174.jpeg" alt="Photo 174">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo175.jpeg" alt="Photo 175">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo176.jpeg" alt="Photo 176">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo177.jpeg" alt="Photo 177">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo178.jpeg" alt="Photo 178">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo179.jpeg" alt="Photo 179">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo180.jpeg" alt="Photo 180">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo181.jpeg" alt="Photo 181">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo182.jpeg" alt="Photo 182">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo183.jpeg" alt="Photo 183">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo184.jpeg" alt="Photo 184">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo185.jpeg" alt="Photo 185">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo186.jpeg" alt="Photo 186">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo187.jpeg" alt="Photo 187">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo188.jpeg" alt="Photo 188">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo189.jpeg" alt="Photo 189">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo190.jpeg" alt="Photo 190">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo191.jpeg" alt="Photo 191">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo192.jpeg" alt="Photo 192">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo193.jpeg" alt="Photo 193">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo194.jpeg" alt="Photo 194">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo195.jpeg" alt="Photo 195">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo196.jpeg" alt="Photo 196">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo197.jpeg" alt="Photo 197">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo198.jpeg" alt="Photo 198">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo199.jpeg" alt="Photo 199">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="photo/photo200.jpeg" alt="Photo 200">
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: STUDENTS (Initially Hidden) -->
+        <div class="section-block" id="students">
+            <h2 class="section-title">Students</h2>
+            <div class="photo-grid">
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student1.jpg" alt="Student 1">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student2.jpg" alt="Student 2">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student3.jpg" alt="Student 3">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student4.jpg" alt="Student 4">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student5.jpg" alt="Student 5">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student6.png" alt="Student 6">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student7.png" alt="Student 7">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student8.jpg" alt="Student 8">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student9.jpg" alt="Student 9">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student10.jpg" alt="Student 10">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student11.jpg" alt="Student 11">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student12.jpg" alt="Student 12">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student13.jpg" alt="Student 13">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student14.jpg" alt="Student 14">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student15.jpg" alt="Student 15">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student16.jpg" alt="Student 16">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student17.jpg" alt="Student 17">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student18.jpg" alt="Student 18">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student19.jpg" alt="Student 19">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student20.jpg" alt="Student 20">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student21.jpg" alt="Student 21">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student22.jpg" alt="Student 22">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student23.jpg" alt="Student 23">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student24.jpg" alt="Student 24">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student25.jpg" alt="Student 25">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student26.jpg" alt="Student 26">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student27.jpg" alt="Student 27">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student28.jpg" alt="Student 28">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student29.jpg" alt="Student 29">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student30.jpg" alt="Student 30">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student31.jpg" alt="Student 31">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student32.jpg" alt="Student 32">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student33.jpg" alt="Student 33">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student34.jpg" alt="Student 34">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student35.jpg" alt="Student 35">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student36.jpg" alt="Student 36">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student37.jpg" alt="Student 37">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student38.jpg" alt="Student 38">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student39.jpg" alt="Student 39">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student40.jpg" alt="Student 40">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student41.jpg" alt="Student 41">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student42.jpg" alt="Student 42">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student43.jpg" alt="Student 43">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student44.jpg" alt="Student 44">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student45.jpg" alt="Student 45">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student46.jpg" alt="Student 46">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student47.jpg" alt="Student 47">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student48.jpg" alt="Student 48">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student49.jpg" alt="Student 49">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="VC  Rising Stars/student50.jpg" alt="Student 50">
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 3: ALUMNI (Initially Hidden) -->
+        <div class="section-block" id="alumni">
+            <h2 class="section-title">Alumni</h2>
+            <div class="photo-grid">
+                <div class="photo-item" onclick="openLightbox(this)"><img src="alumni1.jpg" alt="Alumni 1"></div>
+                <div class="photo-item" onclick="openLightbox(this)"><img src="alumni2.jpg" alt="Alumni 2"></div>
+                <div class="photo-item" onclick="openLightbox(this)"><img src="alumni3.jpg" alt="Alumni 3"></div>
+                <div class="photo-item" onclick="openLightbox(this)"><img src="alumni4.jpg" alt="Alumni 4"></div>
+                <div class="photo-item" onclick="openLightbox(this)"><img src="alumni5.jpg" alt="Alumni 5"></div>
+                <div class="photo-item" onclick="openLightbox(this)"><img src="alumni6.jpg" alt="Alumni 6"></div>
+                <div class="photo-item" onclick="openLightbox(this)"><img src="alumni7.jpg" alt="Alumni 7"></div>
+                <div class="photo-item" onclick="openLightbox(this)"><img src="alumni8.jpg" alt="Alumni 8"></div>
+                <div class="photo-item" onclick="openLightbox(this)"><img src="alumni9.jpg" alt="Alumni 9"></div>
+                <div class="photo-item" onclick="openLightbox(this)"><img src="alumni10.jpg" alt="Alumni 10"></div>
+            </div>
+        </div>
+
+        <!-- SECTION 4: ACHIEVEMENTS (Initially Hidden) -->
+        <div class="section-block" id="achievements">
+            <h2 class="section-title">Achievements</h2>
+            <div class="photo-grid">
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement1.jpeg" alt="Achievement 1">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement2.jpeg" alt="Achievement 2">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement3.jpeg" alt="Achievement 3">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement4.jpeg" alt="Achievement 4">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement5.jpeg" alt="Achievement 5">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement6.jpeg" alt="Achievement 6">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement7.jpeg" alt="Achievement 7">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement8.jpeg" alt="Achievement 8">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement9.jpeg" alt="Achievement 9">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement10.jpeg" alt="Achievement 10">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement11.jpeg" alt="Achievement 11">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement12.jpeg" alt="Achievement 12">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement13.jpeg" alt="Achievement 13">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement14.jpeg" alt="Achievement 14">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement15.jpeg" alt="Achievement 15">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement16.jpg" alt="Achievement 16">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement17.jpeg" alt="Achievement 17">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement18.jpeg" alt="Achievement 18">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement19.jpeg" alt="Achievement 19">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement20.jpeg" alt="Achievement 20">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement21.jpeg" alt="Achievement 21">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement22.jpeg" alt="Achievement 22">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement23.jpeg" alt="Achievement 23">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement24.jpeg" alt="Achievement 24">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement25.jpeg" alt="Achievement 25">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement26.jpeg" alt="Achievement 26">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement27.jpeg" alt="Achievement 27">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement28.jpeg" alt="Achievement 28">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement29.jpeg" alt="Achievement 29">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement30.jpeg" alt="Achievement 30">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement31.jpeg" alt="Achievement 31">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement32.jpeg" alt="Achievement 32">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement33.jpeg" alt="Achievement 33">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement34.jpeg" alt="Achievement 34">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement35.jpeg" alt="Achievement 35">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement36.jpeg" alt="Achievement 36">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement37.jpeg" alt="Achievement 37">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement38.jpeg" alt="Achievement 38">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement39.jpeg" alt="Achievement 39">
+                </div>
+                <div class="photo-item" onclick="openLightbox(this)">
+                    <img src="achiment/achievement40.jpeg" alt="Achievement 40">
+                </div>
+                
+
+
+
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- ==================== LIGHTBOX ==================== -->
+<div class="lightbox" id="lightbox">
+    <!-- Close Button -->
+    <div class="lightbox-close" onclick="closeLightbox()">&times;</div>
+    
+    <!-- Previous Arrow -->
+    <div class="lightbox-nav lightbox-prev" onclick="prevPhoto()"><i class="fas fa-chevron-left"></i></div>
+    
+    <!-- Image Container -->
+    <div class="lightbox-img-container">
+        <img id="lightbox-img" src="" alt="Photo">
+    </div>
+    
+    <!-- Next Arrow -->
+    <div class="lightbox-nav lightbox-next" onclick="nextPhoto()"><i class="fas fa-chevron-right"></i></div>
+    
+    <!-- Photo Counter -->
+    <div class="lightbox-counter">
+        <span id="current-num">1</span> / <span id="total-num">200</span>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <p>&copy; 2026 Vidya Coachings. All Rights Reserved.</p>
+        <p class="tagline">Established April 2015 | Celebrating 10+ Years of Excellence</p>
+        
+        <!-- WEBSITE CREATOR CREDIT -->
+        <div class="website-credit">
+            <p>Designed & Developed by <a href="https://wa.me/919540347869" target="_blank">MR. PRINCE KUMAR DAS</a></p>
+        </div>
+    </div>
+</footer>
+
+<script src="gallery.js"></script>
+
+<a href="https://wa.me/919871749012" target="_blank" rel="noopener" class="whatsapp-float" title="Chat on WhatsApp" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
+</body>
+</html>
