@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Downloads | Notes & Circulars | Vidya Coachings</title>
+    <meta name="description" content="Download study notes and school circulars from Vidya Coachings, Badarpur & Jaitpur, Delhi.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="downloads.css">
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+    <script src="config.js"></script>
+    <script src="cms.js"></script>
+</head>
+<body>
+
+<header id="header">
+    <div class="container">
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="Vidya Coachings" class="logo-img">
+                <span class="logo-text">Vidya <span>Coachings</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#programs">Programs</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="downloads.html" class="active">Downloads</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <a href="index.html" class="nav-btn"><i class="fas fa-home"></i> Back to Home</a>
+            <div class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#programs">Programs</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="downloads.html">Downloads</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="index.html" class="nav-btn" style="text-align:center;margin-top:8px;">Back to Home</a>
+</div>
+
+<section class="gallery-hero downloads-hero">
+    <div class="container">
+        <div class="gallery-hero-badge"><i class="fas fa-download"></i> Study Resources</div>
+        <h1>Downloads</h1>
+        <p>Notes, circulars and important documents for students & parents</p>
+        <div class="gallery-stats">
+            <div class="gallery-stat"><strong id="countAll">0</strong><span>All Files</span></div>
+            <div class="gallery-stat"><strong id="countNotes">0</strong><span>Notes</span></div>
+            <div class="gallery-stat"><strong id="countCirculars">0</strong><span>Circulars</span></div>
+        </div>
+    </div>
+</section>
+
+<div class="gallery-tabs-bar">
+    <div class="container">
+        <div class="gallery-tabs">
+            <button class="tab-btn active" data-section="all-downloads">
+                <i class="fas fa-folder"></i> All <span class="tab-count">0</span>
+            </button>
+            <button class="tab-btn" data-section="notes">
+                <i class="fas fa-book"></i> Notes <span class="tab-count">0</span>
+            </button>
+            <button class="tab-btn" data-section="circulars">
+                <i class="fas fa-bullhorn"></i> Circulars <span class="tab-count">0</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<section class="gallery-section">
+    <div class="container">
+        <div class="section-block active" id="all-downloads">
+            <h2 class="section-title">All Downloads</h2>
+            <div class="download-grid"></div>
+        </div>
+
+        <div class="section-block" id="notes">
+            <h2 class="section-title">Study Notes</h2>
+            <div class="download-grid"></div>
+        </div>
+
+        <div class="section-block" id="circulars">
+            <h2 class="section-title">Circulars & Notices</h2>
+            <div class="download-grid"></div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2026 Vidya Coachings. All Rights Reserved.</p>
+        <p class="tagline">Established April 2015 | Celebrating 10+ Years of Excellence</p>
+        <div class="website-credit">
+            <p>Designed & Developed by <a href="https://wa.me/919540347869" target="_blank" rel="noopener">MR. PRINCE KUMAR DAS</a></p>
+        </div>
+    </div>
+</footer>
+
+<a href="https://wa.me/919871749012" target="_blank" rel="noopener" class="whatsapp-float" title="Chat on WhatsApp" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<script src="downloads.js"></script>
+</body>
+</html>

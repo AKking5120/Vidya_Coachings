@@ -115,4 +115,27 @@
 
         loadSectionPhotos('all-photos');
     });
+
+    window.refreshGalleryCounts = function () {
+        var sections = {
+            'all-photos': document.querySelector('.tab-btn[data-section="all-photos"] .tab-count'),
+            students: document.querySelector('.tab-btn[data-section="students"] .tab-count'),
+            alumni: document.querySelector('.tab-btn[data-section="alumni"] .tab-count'),
+            achievements: document.querySelector('.tab-btn[data-section="achievements"] .tab-count')
+        };
+
+        Object.keys(sections).forEach(function (id) {
+            var section = document.getElementById(id);
+            var countEl = sections[id];
+            if (!section || !countEl) return;
+            var n = section.querySelectorAll('.photo-item').length;
+            countEl.textContent = n;
+        });
+
+        var stats = document.querySelectorAll('.gallery-stat strong');
+        if (stats[0]) {
+            var total = document.querySelectorAll('#all-photos .photo-item').length;
+            stats[0].textContent = total + '+';
+        }
+    };
 })();
