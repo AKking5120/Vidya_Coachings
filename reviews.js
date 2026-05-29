@@ -1,15 +1,8 @@
 /**
- * Vidya Coachings - User Reviews
- *
- * SETUP (one time):
- * 1. Create Google Sheet with columns: Name | Role | Rating | Review | Date | Approved
- *    Row 1 = headers. Approved = "yes" to show on website, "pending" for new submissions.
- * 2. Extensions → Apps Script → paste code from google-apps-script/ReviewsBackend.gs
- * 3. Deploy → New deployment → Web app → Execute as: Me → Who has access: Anyone
- * 4. Copy Web App URL and paste below in API_URL
+ * Vidya Coachings - User Reviews (Google Sheets)
  */
 const REVIEWS_CONFIG = {
-    API_URL: '' // Paste your Google Apps Script Web App URL here
+    API_URL: 'https://script.google.com/macros/s/AKfycbwT_ZLnnHlr5RHHmnxDkPEnd7o_TnF2dWMRaNw3Y0ehOPTBhMqXFl1JlkPN_IYDygOCWg/exec'
 };
 
 (function () {
@@ -42,13 +35,9 @@ const REVIEWS_CONFIG = {
         const r = Math.min(5, Math.max(0, parseInt(rating, 10) || 0));
         let html = '';
         for (let i = 1; i <= 5; i++) {
-            if (i <= r) {
-                html += '<i class="fas fa-star"></i>';
-            } else if (i - 0.5 <= r) {
-                html += '<i class="fas fa-star-half-alt"></i>';
-            } else {
-                html += '<i class="far fa-star"></i>';
-            }
+            html += i <= r
+                ? '<i class="fas fa-star"></i>'
+                : '<i class="far fa-star"></i>';
         }
         return html;
     }
@@ -57,28 +46,27 @@ const REVIEWS_CONFIG = {
         const name = escapeHtml(review.name || 'Anonymous');
         const role = escapeHtml(review.role || '');
         const text = escapeHtml(review.text || review.review || '');
-        const initials = getInitials(review.name);
 
         return (
             '<article class="review-card">' +
             '<div class="review-stars">' + starsHtml(review.rating) + '</div>' +
             '<p class="review-text">"' + text + '"</p>' +
             '<div class="review-author">' +
-            '<div class="review-avatar">' + initials + '</div>' +
+            '<div class="review-avatar">' + getInitials(review.name) + '</div>' +
             '<div><h4>' + name + '</h4><span>' + role + '</span></div>' +
             '</div></article>'
         );
     }
 
     function updateSummary(reviews) {
-        if (!summaryEl || !reviews.length) {
-            if (summaryEl) {
-                summaryEl.innerHTML =
-                    '<div class="rating-badge">' +
-                    '<div class="rating-stars">' + starsHtml(0) + '</div>' +
-                    '<strong>—</strong><span>No ratings yet</span></div>' +
-                    '<p>Be the first to share your experience!</p>';
-            }
+        if (!summaryEl) return;
+
+        if (!reviews.length) {
+            summaryEl.innerHTML =
+                '<div class="rating-badge">' +
+                '<div class="rating-stars">' + starsHtml(0) + '</div>' +
+                '<strong>—</strong><span>No ratings yet</span></div>' +
+                '<p>Be the first to share your experience!</p>';
             return;
         }
 
@@ -86,24 +74,59 @@ const REVIEWS_CONFIG = {
             return sum + (parseInt(r.rating, 10) || 0);
         }, 0);
         const avg = (total / reviews.length).toFixed(1);
-        const full = Math.floor(avg);
-        const half = avg - full >= 0.3;
+        const full = Math.floor(parseFloat(avg));
 
         summaryEl.innerHTML =
             '<div class="rating-badge">' +
-            '<div class="rating-stars">' + starsHtml(half ? full + 0.5 : full) + '</div>' +
+            '<div class="rating-stars">' + starsHtml(full) + '</div>' +
             '<strong>' + avg + '</strong><span>out of 5</span></div>' +
-            '<p>Based on ' + reviews.length + ' review' + (reviews.length === 1 ? '' : 's') + ' from our community</p>';
+            '<p>Based on ' + reviews.length + ' review' + (reviews.length === 1 ? '' : 's') + '</p>';
     }
 
     function showListMessage(html, className) {
         listEl.innerHTML = '<div class="' + (className || 'reviews-message') + '">' + html + '</div>';
     }
 
+    function loadReviewsJsonp() {
+        return new Promise(function (resolve, reject) {
+            const cb = 'vcReviews_' + Date.now();
+            const script = document.createElement('script');
+            const timer = setTimeout(function () {
+                cleanup();
+                reject(new Error('Timeout'));
+            }, 15000);
+
+            function cleanup() {
+                clearTimeout(timer);
+                if (script.parentNode) script.parentNode.removeChild(script);
+                try { delete window[cb]; } catch (e) { window[cb] = undefined; }
+            }
+
+            window[cb] = function (data) {
+                cleanup();
+                resolve(Array.isArray(data) ? data : []);
+            };
+
+            script.onerror = function () {
+                cleanup();
+                reject(new Error('Script load failed'));
+            };
+
+            script.src = REVIEWS_CONFIG.API_URL + '?callback=' + cb + '&t=' + Date.now();
+            document.body.appendChild(script);
+        });
+    }
+
+    async function loadReviewsFetch() {
+        const res = await fetch(REVIEWS_CONFIG.API_URL + '?t=' + Date.now());
+        const text = await res.text();
+        return JSON.parse(text);
+    }
+
     async function loadReviews() {
         if (!REVIEWS_CONFIG.API_URL) {
             showListMessage(
-                '<i class="fas fa-info-circle"></i> Reviews will appear here once the site owner connects Google Sheets. You can still submit your review below.',
+                '<i class="fas fa-info-circle"></i> Connect Google Sheet URL in reviews.js',
                 'reviews-setup-notice'
             );
             updateSummary([]);
@@ -113,12 +136,25 @@ const REVIEWS_CONFIG = {
         showListMessage('<i class="fas fa-spinner fa-spin"></i> Loading reviews...', 'reviews-loading');
 
         try {
-            const res = await fetch(REVIEWS_CONFIG.API_URL);
-            const data = await res.json();
+            let data;
+            try {
+                data = await loadReviewsJsonp();
+            } catch (e1) {
+                data = await loadReviewsFetch();
+            }
 
-            if (!Array.isArray(data) || data.length === 0) {
+            if (!Array.isArray(data)) {
+                throw new Error('Invalid response');
+            }
+
+            data = data.filter(function (r) {
+                const n = String(r.name || '').trim().toLowerCase();
+                return n && n !== 'name' && String(r.role || '').toLowerCase() !== 'role';
+            });
+
+            if (data.length === 0) {
                 showListMessage(
-                    '<i class="fas fa-comment-dots"></i> No reviews yet. Be the first to share your experience!',
+                    '<i class="fas fa-comment-dots"></i> No approved reviews yet.<br><small>Submit a review below, then set <strong>Approved</strong> column to <strong>yes</strong> in Google Sheet.</small>',
                     'reviews-empty'
                 );
                 updateSummary([]);
@@ -128,8 +164,9 @@ const REVIEWS_CONFIG = {
             listEl.innerHTML = data.map(renderReview).join('');
             updateSummary(data);
         } catch (err) {
+            console.error('Reviews load error:', err);
             showListMessage(
-                '<i class="fas fa-exclamation-triangle"></i> Could not load reviews. Please try again later.',
+                '<i class="fas fa-exclamation-triangle"></i> Could not load reviews.<br><small>Open site via Live Server (not double-click HTML). Check Sheet: Approved = <strong>yes</strong></small>',
                 'reviews-error'
             );
             updateSummary([]);
@@ -140,7 +177,7 @@ const REVIEWS_CONFIG = {
         if (!starPicker || !ratingInput) return;
 
         const stars = starPicker.querySelectorAll('button');
-        let selected = 0;
+        let selected = 5;
 
         function paint(val) {
             stars.forEach(function (btn, i) {
@@ -157,11 +194,7 @@ const REVIEWS_CONFIG = {
 
         stars.forEach(function (btn, index) {
             const value = index + 1;
-
-            btn.addEventListener('mouseenter', function () {
-                paint(value);
-            });
-
+            btn.addEventListener('mouseenter', function () { paint(value); });
             btn.addEventListener('click', function () {
                 selected = value;
                 ratingInput.value = value;
@@ -169,32 +202,20 @@ const REVIEWS_CONFIG = {
             });
         });
 
-        starPicker.addEventListener('mouseleave', function () {
-            paint(selected);
-        });
-
+        starPicker.addEventListener('mouseleave', function () { paint(selected); });
         ratingInput.value = '5';
-        selected = 5;
         paint(5);
     }
 
     function showFormMessage(text, type) {
         if (!formMsgEl) return;
-        formMsgEl.textContent = text;
+        formMsgEl.innerHTML = text;
         formMsgEl.className = 'review-form-message ' + (type || '');
         formMsgEl.hidden = false;
     }
 
     async function submitReview(e) {
         e.preventDefault();
-
-        if (!REVIEWS_CONFIG.API_URL) {
-            showFormMessage(
-                'Review form is not connected yet. Please contact Vidya Coachings on WhatsApp to share your review.',
-                'error'
-            );
-            return;
-        }
 
         const name = document.getElementById('reviewName').value.trim();
         const role = document.getElementById('reviewRole').value.trim();
@@ -210,11 +231,14 @@ const REVIEWS_CONFIG = {
         submitBtn.disabled = true;
         showFormMessage('Submitting your review...', 'info');
 
+        const payload = JSON.stringify({ name: name, role: role, rating: rating, text: text });
+
         try {
             const res = await fetch(REVIEWS_CONFIG.API_URL, {
                 method: 'POST',
+                redirect: 'follow',
                 headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                body: JSON.stringify({ name: name, role: role, rating: rating, text: text })
+                body: payload
             });
 
             const result = await res.json();
@@ -223,14 +247,18 @@ const REVIEWS_CONFIG = {
                 formEl.reset();
                 initStarPicker();
                 showFormMessage(
-                    'Thank you! Your review has been submitted. It will appear on the website after approval.',
+                    'Thank you! Review submitted. In Google Sheet, set <strong>Approved</strong> to <strong>yes</strong> to show it here, then refresh.',
                     'success'
                 );
             } else {
-                showFormMessage(result.error || 'Could not submit review. Please try again.', 'error');
+                showFormMessage(result.error || 'Could not submit. Try again.', 'error');
             }
         } catch (err) {
-            showFormMessage('Something went wrong. Please try again or contact us on WhatsApp.', 'error');
+            console.error('Review submit error:', err);
+            showFormMessage(
+                'Submit failed. Open site with <strong>Live Server</strong> (VS Code) instead of double-clicking index.html.',
+                'error'
+            );
         }
 
         submitBtn.disabled = false;
