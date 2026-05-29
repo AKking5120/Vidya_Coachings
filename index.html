@@ -33,6 +33,7 @@
                 <li><a href="index.html#about">About</a></li>
                 <li><a href="index.html#programs">Programs</a></li>
                 <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="#reviews">Reviews</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <div class="header-social">
@@ -54,6 +55,7 @@
     <a href="index.html#about">About</a>
     <a href="index.html#programs">Programs</a>
     <a href="gallery.html">Gallery</a>
+    <a href="#reviews">Reviews</a>
     <a href="#contact">Contact</a>
     <a href="#contact" class="btn btn-primary">Enroll Now</a>
     
@@ -501,6 +503,76 @@
         </div>
     </section>
 
+    <!-- REVIEWS SECTION -->
+    <section id="reviews" class="section reviews-section">
+        <div class="container">
+            <div class="section-title">
+                <div class="accent-line"></div>
+                <h2>What Parents & Students Say</h2>
+                <p>Real reviews from our Vidya Coachings family</p>
+            </div>
+
+            <div id="reviewsSummary" class="reviews-summary">
+                <div class="rating-badge">
+                    <div class="rating-stars"><i class="fas fa-spinner fa-spin"></i></div>
+                    <strong>—</strong>
+                    <span>Loading...</span>
+                </div>
+            </div>
+
+            <div id="reviewsList" class="reviews-grid">
+                <div class="reviews-loading"><i class="fas fa-spinner fa-spin"></i> Loading reviews...</div>
+            </div>
+
+            <div class="review-form-box">
+                <h3><i class="fas fa-pen"></i> Write Your Review</h3>
+                <p>Share your experience. Reviews appear on the website after approval.</p>
+                <form id="reviewForm" class="review-form" novalidate>
+                    <div class="review-form-row">
+                        <div class="form-group">
+                            <label for="reviewName">Your Name *</label>
+                            <input type="text" id="reviewName" name="name" required placeholder="e.g. Rakesh Kumar" maxlength="80">
+                        </div>
+                        <div class="form-group">
+                            <label for="reviewRole">You are *</label>
+                            <select id="reviewRole" name="role" required>
+                                <option value="">Select...</option>
+                                <option value="Parent">Parent</option>
+                                <option value="Student">Student</option>
+                                <option value="Parent — Class 1-8">Parent — Class 1-8</option>
+                                <option value="Parent — Class 9-10">Parent — Class 9-10</option>
+                                <option value="Parent — Class 11-12">Parent — Class 11-12</option>
+                                <option value="Class 9-10 Student">Class 9-10 Student</option>
+                                <option value="Class 11-12 Student">Class 11-12 Student</option>
+                                <option value="Alumni">Alumni</option>
+                                <option value="CTET / Competitive Aspirant">CTET / Competitive Aspirant</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Your Rating *</label>
+                        <div id="starPicker" class="star-picker" role="group" aria-label="Rating">
+                            <button type="button" aria-label="1 star"><i class="fas fa-star"></i></button>
+                            <button type="button" aria-label="2 stars"><i class="fas fa-star"></i></button>
+                            <button type="button" aria-label="3 stars"><i class="fas fa-star"></i></button>
+                            <button type="button" aria-label="4 stars"><i class="fas fa-star"></i></button>
+                            <button type="button" aria-label="5 stars"><i class="fas fa-star"></i></button>
+                        </div>
+                        <input type="hidden" id="reviewRating" name="rating" value="5">
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewText">Your Review *</label>
+                        <textarea id="reviewText" name="text" rows="4" required placeholder="Tell us about teaching quality, results, environment..." maxlength="500"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Submit Review
+                    </button>
+                    <p id="reviewFormMessage" class="review-form-message" hidden></p>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <!-- CONTACT SECTION -->
     <section id="contact" class="section contact-section">
         <div class="container">
@@ -615,6 +687,7 @@
                 <a href="index.html#about">About Us</a>
                 <a href="index.html#programs">Programs</a>
                 <a href="gallery.html">Gallery</a>
+                <a href="#reviews">Reviews</a>
                 <a href="#contact">Contact</a>
                 <a href="#query">Admission Form</a>
             </div>
@@ -643,6 +716,7 @@
     </button>
 
     <script src="script.js"></script>
+    <script src="reviews.js"></script>
 </body>
 
 </html>
