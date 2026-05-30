@@ -324,7 +324,7 @@ nav {
     color: rgba(255, 255, 255, 0.22);
 }
 
-.hero-doodles i:nth-child(1)  { transform: rotate(-12deg); animation-delay: 0s; }
+.hero-doodles i:nth-child(1)  { transform: rotate(-20deg); animation-delay: 0s; }
 .hero-doodles i:nth-child(2)  { transform: rotate(8deg);  font-size: clamp(1.8rem, 3.5vw, 2.8rem); animation-delay: 0.4s; }
 .hero-doodles i:nth-child(3)  { transform: rotate(-5deg); animation-delay: 0.8s; }
 .hero-doodles i:nth-child(4)  { transform: rotate(15deg); animation-delay: 1.2s; }
