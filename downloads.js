@@ -1,11 +1,7 @@
-/* Vidya Coachings - Downloads Page */
-
-/** Optional local files (folder uploads without admin) */
-const STATIC_DOWNLOAD_ITEMS = [];
-
-let DOWNLOAD_ITEMS = STATIC_DOWNLOAD_ITEMS.slice();
+/* Vidya Coachings - Downloads Page — edit downloads-data.js to add files */
 
 (function () {
+    var DOWNLOAD_ITEMS = window.VIDYA_DOWNLOADS || [];
     let currentSection = 'all-downloads';
 
     function getIcon(type) {
@@ -21,7 +17,6 @@ let DOWNLOAD_ITEMS = STATIC_DOWNLOAD_ITEMS.slice();
         const icon = getIcon(item.type);
         const typeLabel = getTypeLabel(item.type);
         const catLabel = item.category === 'notes' ? 'Notes' : 'Circular';
-        const fileUrl = item.file || item.url || '';
 
         return (
             '<article class="download-card ' + item.category + '">' +
@@ -34,8 +29,8 @@ let DOWNLOAD_ITEMS = STATIC_DOWNLOAD_ITEMS.slice();
             '<span><i class="fas fa-file"></i> ' + typeLabel + '</span>' +
             '</p>' +
             '<div class="download-actions">' +
-            '<a href="' + escapeAttr(fileUrl) + '" class="btn-download" download><i class="fas fa-download"></i> Download</a>' +
-            '<a href="' + escapeAttr(fileUrl) + '" class="btn-view" target="_blank" rel="noopener"><i class="fas fa-eye"></i> View</a>' +
+            '<a href="' + escapeAttr(item.file) + '" class="btn-download" download><i class="fas fa-download"></i> Download</a>' +
+            '<a href="' + escapeAttr(item.file) + '" class="btn-view" target="_blank" rel="noopener"><i class="fas fa-eye"></i> View</a>' +
             '</div></article>'
         );
     }
@@ -68,18 +63,12 @@ let DOWNLOAD_ITEMS = STATIC_DOWNLOAD_ITEMS.slice();
             grid.innerHTML =
                 '<div class="downloads-empty">' +
                 '<i class="fas fa-folder-open"></i>' +
-                '<p>No files in this section yet.</p>' +
+                '<p>No files yet. Add PDFs in downloads/ folder and edit downloads.js</p>' +
                 '</div>';
             return;
         }
 
         grid.innerHTML = items.map(renderCard).join('');
-    }
-
-    function renderAllSections() {
-        ['all-downloads', 'notes', 'circulars'].forEach(renderSection);
-        updateTabCounts();
-        updateHeroCounts();
     }
 
     function updateTabCounts() {
@@ -102,20 +91,6 @@ let DOWNLOAD_ITEMS = STATIC_DOWNLOAD_ITEMS.slice();
         if (circEl) circEl.textContent = circulars;
     }
 
-    function mergeCmsDownloads(cmsItems) {
-        if (!cmsItems || !cmsItems.length) return;
-        cmsItems.forEach(function (item) {
-            DOWNLOAD_ITEMS.unshift({
-                title: item.title,
-                category: item.category,
-                classLabel: item.classLabel,
-                date: item.date,
-                file: item.file,
-                type: item.type || 'pdf'
-            });
-        });
-    }
-
     window.showDownloadSection = function (sectionId, btn) {
         currentSection = sectionId;
 
@@ -136,54 +111,32 @@ let DOWNLOAD_ITEMS = STATIC_DOWNLOAD_ITEMS.slice();
     };
 
     document.addEventListener('DOMContentLoaded', function () {
-        function initPage() {
-            renderAllSections();
+        ['all-downloads', 'notes', 'circulars'].forEach(renderSection);
+        updateTabCounts();
+        updateHeroCounts();
 
-            document.querySelectorAll('.tab-btn').forEach(function (btn) {
-                btn.addEventListener('click', function () {
-                    showDownloadSection(this.getAttribute('data-section'), this);
-                });
+        document.querySelectorAll('.tab-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                showDownloadSection(this.getAttribute('data-section'), this);
             });
+        });
 
-            var menuToggle = document.getElementById('menuToggle');
-            var mobileMenu = document.getElementById('mobileMenu');
-            if (menuToggle && mobileMenu) {
-                menuToggle.addEventListener('click', function () {
-                    mobileMenu.classList.toggle('active');
-                    var icon = menuToggle.querySelector('i');
-                    if (icon) {
-                        icon.classList.toggle('fa-bars');
-                        icon.classList.toggle('fa-times');
-                    }
-                });
-                mobileMenu.querySelectorAll('a').forEach(function (link) {
-                    link.addEventListener('click', function () {
-                        mobileMenu.classList.remove('active');
-                    });
-                });
-            }
-        }
-
-        function loadCmsAndInit(items) {
-            DOWNLOAD_ITEMS = STATIC_DOWNLOAD_ITEMS.slice();
-            mergeCmsDownloads(items || []);
-            initPage();
-        }
-
-        if (window.VidyaCMS && VidyaCMS.getApiUrl()) {
-            var cached = VidyaCMS.getCachedDownloads();
-            if (cached && cached.length) {
-                loadCmsAndInit(cached);
-            }
-            VidyaCMS.getDownloads().then(loadCmsAndInit);
-            window.addEventListener('vidya-cms-updated', function (e) {
-                if (e.detail && e.detail.action === 'downloads') {
-                    DOWNLOAD_ITEMS = STATIC_DOWNLOAD_ITEMS.slice();
-                    loadCmsAndInit(e.detail.data);
+        var menuToggle = document.getElementById('menuToggle');
+        var mobileMenu = document.getElementById('mobileMenu');
+        if (menuToggle && mobileMenu) {
+            menuToggle.addEventListener('click', function () {
+                mobileMenu.classList.toggle('active');
+                var icon = menuToggle.querySelector('i');
+                if (icon) {
+                    icon.classList.toggle('fa-bars');
+                    icon.classList.toggle('fa-times');
                 }
             });
-        } else {
-            initPage();
+            mobileMenu.querySelectorAll('a').forEach(function (link) {
+                link.addEventListener('click', function () {
+                    mobileMenu.classList.remove('active');
+                });
+            });
         }
     });
 })();

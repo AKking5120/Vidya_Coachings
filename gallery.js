@@ -73,7 +73,40 @@
         currentIndex = index;
     }
 
+    function injectDataPhotos() {
+        var CAT_SECTION = { general: 'all-photos', students: 'students', alumni: 'alumni', achievements: 'achievements' };
+        var photos = window.VIDYA_GALLERY || [];
+        if (!photos.length) return;
+
+        function escAttr(s) {
+            return String(s || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+        }
+
+        photos.forEach(function (item) {
+            var sectionId = CAT_SECTION[item.cat] || 'all-photos';
+            var section = document.getElementById(sectionId);
+            if (!section) return;
+            var grid = section.querySelector('.photo-grid');
+            if (grid) {
+                grid.insertAdjacentHTML('afterbegin',
+                    '<div class="photo-item" onclick="openLightbox(this)">' +
+                    '<img src="' + escAttr(item.src) + '" alt="' + escAttr(item.alt) + '" loading="lazy"></div>');
+            }
+        });
+
+        document.querySelectorAll('.tab-btn').forEach(function (btn) {
+            var id = btn.getAttribute('data-section');
+            var sec = document.getElementById(id);
+            var countEl = btn.querySelector('.tab-count');
+            if (sec && countEl) countEl.textContent = sec.querySelectorAll('.photo-item').length;
+        });
+        var stat = document.querySelector('.gallery-stat strong');
+        var allGrid = document.getElementById('all-photos');
+        if (stat && allGrid) stat.textContent = allGrid.querySelectorAll('.photo-item').length + '+';
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
+        injectDataPhotos();
         document.querySelectorAll('.photo-item img').forEach(function (img) {
             img.loading = 'lazy';
         });
@@ -115,27 +148,4 @@
 
         loadSectionPhotos('all-photos');
     });
-
-    window.refreshGalleryCounts = function () {
-        var sections = {
-            'all-photos': document.querySelector('.tab-btn[data-section="all-photos"] .tab-count'),
-            students: document.querySelector('.tab-btn[data-section="students"] .tab-count'),
-            alumni: document.querySelector('.tab-btn[data-section="alumni"] .tab-count'),
-            achievements: document.querySelector('.tab-btn[data-section="achievements"] .tab-count')
-        };
-
-        Object.keys(sections).forEach(function (id) {
-            var section = document.getElementById(id);
-            var countEl = sections[id];
-            if (!section || !countEl) return;
-            var n = section.querySelectorAll('.photo-item').length;
-            countEl.textContent = n;
-        });
-
-        var stats = document.querySelectorAll('.gallery-stat strong');
-        if (stats[0]) {
-            var total = document.querySelectorAll('#all-photos .photo-item').length;
-            stats[0].textContent = total + '+';
-        }
-    };
 })();
