@@ -18,7 +18,7 @@ window.VIDYA_DOWNLOADS = [
         category: 'notes',
         classLabel: 'Class 10',
         date: '2026',
-        file: '/downloads/notes/class10-history-chapter2.pdf',
+        file: 'downloads/notes/class10-history-chapter2.pdf',
         type: 'pdf'
     },
 ];
