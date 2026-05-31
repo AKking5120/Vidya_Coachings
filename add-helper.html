@@ -8,35 +8,75 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        :root { --primary: #1e3a5f; --accent: #f59e0b; --light: #f8fafc; }
+        :root { --primary: #1e3a5f; --accent: #f59e0b; --light: #f8fafc; --ok: #059669; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: Poppins, sans-serif; background: var(--light); color: #334155; padding: 24px 16px 48px; }
         .wrap { max-width: 560px; margin: 0 auto; }
         h1 { color: var(--primary); font-size: 1.35rem; margin-bottom: 6px; }
-        .sub { color: #64748b; font-size: 0.9rem; margin-bottom: 24px; }
+        .sub { color: #64748b; font-size: 0.9rem; margin-bottom: 24px; line-height: 1.5; }
         .tabs { display: flex; gap: 8px; margin-bottom: 20px; }
         .tab { flex: 1; padding: 12px; border: none; border-radius: 10px; font-family: inherit; font-weight: 600; cursor: pointer; background: #fff; color: #64748b; }
         .tab.active { background: var(--primary); color: #fff; }
         .panel { display: none; background: #fff; padding: 24px; border-radius: 14px; box-shadow: 0 4px 20px rgba(0,0,0,.08); }
         .panel.active { display: block; }
+        .steps { list-style: none; margin-bottom: 18px; font-size: 0.85rem; color: #64748b; }
+        .steps li { display: flex; gap: 10px; margin-bottom: 8px; align-items: flex-start; }
+        .steps span.num { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: var(--primary); color: #fff; font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+        .dropzone {
+            border: 2px dashed #cbd5e1;
+            border-radius: 12px;
+            padding: 28px 16px;
+            text-align: center;
+            cursor: pointer;
+            background: #f8fafc;
+            transition: border-color .2s, background .2s;
+        }
+        .dropzone:hover, .dropzone.dragover { border-color: var(--accent); background: #fffbeb; }
+        .dropzone i.main { font-size: 2rem; color: var(--primary); margin-bottom: 10px; }
+        .dropzone p { font-size: 0.95rem; font-weight: 600; color: var(--primary); }
+        .dropzone small { display: block; margin-top: 6px; color: #94a3b8; font-size: 0.8rem; }
+        .dropzone input { display: none; }
+        .preview { margin-top: 14px; display: none; }
+        .preview.show { display: block; }
+        .preview img { max-width: 100%; max-height: 180px; border-radius: 10px; object-fit: contain; background: #f1f5f9; }
+        .file-chip { display: flex; align-items: center; gap: 10px; padding: 12px; background: #f1f5f9; border-radius: 10px; margin-top: 14px; }
+        .file-chip i { font-size: 1.5rem; color: #dc2626; }
+        .file-chip .name { font-weight: 600; font-size: 0.9rem; word-break: break-all; }
+        .save-hint {
+            margin-top: 14px;
+            padding: 12px 14px;
+            background: #e0f2fe;
+            border-radius: 10px;
+            font-size: 0.85rem;
+        }
+        .save-hint strong { color: var(--primary); display: block; margin-bottom: 4px; }
+        .save-hint code { background: #fff; padding: 2px 8px; border-radius: 6px; font-size: 0.82rem; word-break: break-all; }
         label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--primary); margin: 14px 0 6px; }
-        label:first-child { margin-top: 0; }
         input, select { width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-family: inherit; }
         .btn { width: 100%; margin-top: 18px; padding: 12px; background: var(--accent); color: #fff; border: none; border-radius: 50px; font-family: inherit; font-weight: 600; cursor: pointer; }
         .btn:hover { background: #d97706; }
+        .btn.secondary { background: #fff; color: var(--primary); border: 2px solid var(--primary); margin-top: 10px; }
+        .btn.secondary:hover { background: #f1f5f9; }
         .out { margin-top: 20px; }
         .out label { margin-top: 0; }
         textarea { width: 100%; min-height: 100px; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-family: Consolas, monospace; font-size: 0.85rem; resize: vertical; }
-        .copy { margin-top: 8px; padding: 8px 16px; background: var(--primary); color: #fff; border: none; border-radius: 8px; cursor: pointer; font-family: inherit; }
-        .ok { color: #059669; font-size: 0.85rem; margin-top: 8px; display: none; }
-        .tip { margin-top: 16px; padding: 12px; background: #fef3c7; border-radius: 8px; font-size: 0.85rem; }
-        a.back { display: inline-block; margin-top: 20px; color: var(--primary); }
+        .copy-row { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+        .copy { padding: 8px 16px; background: var(--primary); color: #fff; border: none; border-radius: 8px; cursor: pointer; font-family: inherit; font-weight: 600; }
+        .copy.alt { background: var(--ok); }
+        .copy.secondary { background: #fff; color: var(--primary); border: 2px solid var(--primary); }
+        .copy.secondary:hover { background: #f1f5f9; }
+        .ok { color: var(--ok); font-size: 0.85rem; margin-top: 8px; display: none; }
+        .tip { margin-top: 16px; padding: 12px; background: #fef3c7; border-radius: 8px; font-size: 0.85rem; line-height: 1.5; }
+        a.back { display: inline-block; margin-top: 20px; color: var(--primary); text-decoration: none; font-weight: 500; }
+        a.back:hover { text-decoration: underline; }
+        .links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; font-size: 0.85rem; }
+        .links a { color: var(--primary); }
     </style>
 </head>
 <body>
 <div class="wrap">
-    <h1><i class="fas fa-magic"></i> Add Helper</h1>
-    <p class="sub">Form bharo → code copy karo → data file mein paste karo</p>
+    <h1><i class="fas fa-cloud-upload-alt"></i> Add Photo / PDF</h1>
+    <p class="sub">File choose karo — path aur code khud ban jayega. Phir file ko sahi folder mein copy karo aur code data file mein paste karo.</p>
 
     <div class="tabs">
         <button type="button" class="tab active" data-panel="photoPanel"><i class="fas fa-image"></i> Photo</button>
@@ -44,7 +84,29 @@
     </div>
 
     <div id="photoPanel" class="panel active">
-        <label>Step 1: Image file path (folder mein rakho pehle)</label>
+        <ol class="steps">
+            <li><span class="num">1</span><span>Neeche photo choose karo (click ya drag)</span></li>
+            <li><span class="num">2</span><span>File ko project ke <strong>photo/</strong> folder mein same naam se save karo</span></li>
+            <li><span class="num">3</span><span>Code copy karke <strong>gallery-data.js</strong> mein paste karo</span></li>
+        </ol>
+
+        <label class="dropzone" id="photoDrop">
+            <input type="file" id="photoFile" accept="image/jpeg,image/jpg,image/png,image/webp,image/gif">
+            <i class="fas fa-images main"></i>
+            <p>Photo choose karo</p>
+            <small>JPG, PNG, WEBP — drag & drop bhi chalega</small>
+        </label>
+
+        <div class="preview" id="photoPreview">
+            <img id="photoPreviewImg" alt="Preview">
+        </div>
+
+        <div class="save-hint" id="photoSaveHint" style="display:none;">
+            <strong>Is naam se save karo:</strong>
+            <code id="photoSavePath"></code>
+        </div>
+
+        <label>Website path (auto — zarurat ho to edit karo)</label>
         <input type="text" id="photoSrc" placeholder="photo/photo201.jpeg">
 
         <label>Caption (alt text)</label>
@@ -58,19 +120,48 @@
             <option value="achievements">Achievements</option>
         </select>
 
-        <button type="button" class="btn" id="genPhoto">Generate code</button>
+        <button type="button" class="btn" id="genPhoto">Code update karo</button>
 
         <div class="out">
-            <label>Copy this → paste in <strong>gallery-data.js</strong></label>
-            <textarea id="photoOut" readonly></textarea>
-            <button type="button" class="copy" data-target="photoOut">Copy</button>
+            <label>Copy → <strong>gallery-data.js</strong></label>
+            <textarea id="photoOut" readonly placeholder="Pehle photo choose karo…"></textarea>
+            <div class="copy-row">
+                <button type="button" class="copy alt" data-target="photoOut">Copy code</button>
+                <button type="button" class="copy secondary" id="copyPhotoPath">Copy folder path</button>
+            </div>
             <p class="ok" id="photoOk">Copied!</p>
         </div>
-        <p class="tip"><strong>File:</strong> <code>gallery-data.js</code> — array ke andar comma ke saath paste karo.</p>
+        <p class="tip"><strong>Tip:</strong> Cursor / VS Code mein <code>photo/</code> folder kholo, file paste karo, phir <code>gallery-data.js</code> ke array mein line add karo.</p>
+        <div class="links">
+            <a href="gallery.html" target="_blank"><i class="fas fa-external-link-alt"></i> Gallery dekho</a>
+        </div>
     </div>
 
     <div id="filePanel" class="panel">
-        <label>Step 1: PDF path (downloads/notes/ ya downloads/circulars/)</label>
+        <ol class="steps">
+            <li><span class="num">1</span><span>PDF choose karo (click ya drag)</span></li>
+            <li><span class="num">2</span><span>File ko <strong>downloads/notes/</strong> ya <strong>downloads/circulars/</strong> mein save karo</span></li>
+            <li><span class="num">3</span><span>Code copy karke <strong>downloads-data.js</strong> mein paste karo</span></li>
+        </ol>
+
+        <label class="dropzone" id="pdfDrop">
+            <input type="file" id="pdfFile" accept="application/pdf,.pdf">
+            <i class="fas fa-file-pdf main"></i>
+            <p>PDF choose karo</p>
+            <small>Drag & drop supported</small>
+        </label>
+
+        <div class="file-chip" id="pdfChip" style="display:none;">
+            <i class="fas fa-file-pdf"></i>
+            <span class="name" id="pdfChipName"></span>
+        </div>
+
+        <div class="save-hint" id="pdfSaveHint" style="display:none;">
+            <strong>Is naam se save karo:</strong>
+            <code id="pdfSavePath"></code>
+        </div>
+
+        <label>Website path (auto)</label>
         <input type="text" id="filePath" placeholder="downloads/notes/class10-maths.pdf">
 
         <label>Title</label>
@@ -78,8 +169,8 @@
 
         <label>Type</label>
         <select id="fileCat">
-            <option value="notes">Notes</option>
-            <option value="circulars">Circular</option>
+            <option value="notes">Notes → downloads/notes/</option>
+            <option value="circulars">Circular → downloads/circulars/</option>
         </select>
 
         <label>Class</label>
@@ -88,15 +179,21 @@
         <label>Year</label>
         <input type="text" id="fileDate" value="2026">
 
-        <button type="button" class="btn" id="genFile">Generate code</button>
+        <button type="button" class="btn" id="genFile">Code update karo</button>
 
         <div class="out">
-            <label>Copy this → paste in <strong>downloads-data.js</strong></label>
-            <textarea id="fileOut" readonly></textarea>
-            <button type="button" class="copy" data-target="fileOut">Copy</button>
+            <label>Copy → <strong>downloads-data.js</strong></label>
+            <textarea id="fileOut" readonly placeholder="Pehle PDF choose karo…"></textarea>
+            <div class="copy-row">
+                <button type="button" class="copy alt" data-target="fileOut">Copy code</button>
+                <button type="button" class="copy secondary" id="copyPdfPath">Copy folder path</button>
+            </div>
             <p class="ok" id="fileOk">Copied!</p>
         </div>
-        <p class="tip"><strong>File:</strong> <code>downloads-data.js</code> — array ke andar paste karo.</p>
+        <p class="tip"><strong>Tip:</strong> Category badalne par folder path khud update ho jata hai.</p>
+        <div class="links">
+            <a href="downloads.html" target="_blank"><i class="fas fa-external-link-alt"></i> Downloads dekho</a>
+        </div>
     </div>
 
     <a href="index.html" class="back"><i class="fas fa-arrow-left"></i> Back to site</a>
@@ -114,36 +211,198 @@ document.querySelectorAll('.tab').forEach(function (t) {
 
 function esc(s) { return String(s || '').replace(/'/g, "\\'"); }
 
-document.getElementById('genPhoto').addEventListener('click', function () {
+function slugName(name) {
+    var base = (name || '').replace(/^.*[\\/]/, '').replace(/\.[^.]+$/, '');
+    return base
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '') || 'file';
+}
+
+function titleFromFilename(name) {
+    var base = (name || '').replace(/^.*[\\/]/, '').replace(/\.[^.]+$/, '');
+    return base
+        .replace(/[-_]+/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .replace(/\b\w/g, function (c) { return c.toUpperCase(); }) || 'Document';
+}
+
+function setupDropzone(zoneId, inputId, onFiles) {
+    var zone = document.getElementById(zoneId);
+    var input = document.getElementById(inputId);
+    zone.addEventListener('click', function (e) {
+        if (e.target.tagName !== 'INPUT') input.click();
+    });
+    input.addEventListener('change', function () {
+        if (input.files && input.files[0]) onFiles(input.files[0]);
+    });
+    ['dragenter', 'dragover'].forEach(function (ev) {
+        zone.addEventListener(ev, function (e) {
+            e.preventDefault();
+            zone.classList.add('dragover');
+        });
+    });
+    ['dragleave', 'drop'].forEach(function (ev) {
+        zone.addEventListener(ev, function (e) {
+            e.preventDefault();
+            zone.classList.remove('dragover');
+        });
+    });
+    zone.addEventListener('drop', function (e) {
+        var f = e.dataTransfer.files && e.dataTransfer.files[0];
+        if (f) onFiles(f);
+    });
+}
+
+var lastPhotoObjectUrl = null;
+
+function onPhotoPicked(file) {
+    if (!file.type.match(/^image\//)) {
+        alert('Sirf image file chalegi (JPG, PNG, …)');
+        return;
+    }
+    var ext = (file.name.match(/\.[^.]+$/) || ['.jpg'])[0].toLowerCase();
+    var path = 'photo/' + slugName(file.name) + ext;
+    document.getElementById('photoSrc').value = path;
+    if (!document.getElementById('photoAlt').value.trim()) {
+        document.getElementById('photoAlt').value = titleFromFilename(file.name);
+    }
+    document.getElementById('photoSavePath').textContent = path;
+    document.getElementById('photoSaveHint').style.display = 'block';
+    var prev = document.getElementById('photoPreview');
+    var img = document.getElementById('photoPreviewImg');
+    if (lastPhotoObjectUrl) URL.revokeObjectURL(lastPhotoObjectUrl);
+    lastPhotoObjectUrl = URL.createObjectURL(file);
+    img.src = lastPhotoObjectUrl;
+    prev.classList.add('show');
+    generatePhotoCode();
+}
+
+function generatePhotoCode() {
     var src = document.getElementById('photoSrc').value.trim();
     var alt = document.getElementById('photoAlt').value.trim() || 'Photo';
     var cat = document.getElementById('photoCat').value;
-    if (!src) { alert('Image path likho'); return; }
+    if (!src) {
+        document.getElementById('photoOut').value = '';
+        return;
+    }
     document.getElementById('photoOut').value =
         "    { src: '" + esc(src) + "', alt: '" + esc(alt) + "', cat: '" + cat + "' },";
-});
+}
 
-document.getElementById('genFile').addEventListener('click', function () {
+var lastPdfName = '';
+
+function pdfFolder(cat) {
+    return cat === 'circulars' ? 'downloads/circulars/' : 'downloads/notes/';
+}
+
+function onPdfPicked(file) {
+    if (file.type !== 'application/pdf' && !/\.pdf$/i.test(file.name)) {
+        alert('Sirf PDF file chalegi');
+        return;
+    }
+    lastPdfName = file.name;
+    document.getElementById('pdfChip').style.display = 'flex';
+    document.getElementById('pdfChipName').textContent = file.name;
+    if (!document.getElementById('fileTitle').value.trim() ||
+        document.getElementById('fileTitle').dataset.auto === '1') {
+        document.getElementById('fileTitle').value = titleFromFilename(file.name);
+        document.getElementById('fileTitle').dataset.auto = '1';
+    }
+    updatePdfPath();
+    generateFileCode();
+}
+
+function updatePdfPath() {
+    if (!lastPdfName) return;
+    var cat = document.getElementById('fileCat').value;
+    var path = pdfFolder(cat) + slugName(lastPdfName) + '.pdf';
+    document.getElementById('filePath').value = path;
+    document.getElementById('pdfSavePath').textContent = path;
+    document.getElementById('pdfSaveHint').style.display = 'block';
+}
+
+function generateFileCode() {
     var file = document.getElementById('filePath').value.trim();
     var title = document.getElementById('fileTitle').value.trim();
-    if (!file || !title) { alert('PDF path aur title likho'); return; }
+    if (!file || !title) {
+        document.getElementById('fileOut').value = '';
+        return;
+    }
     var cat = document.getElementById('fileCat').value;
     var cls = document.getElementById('fileClass').value.trim();
     var date = document.getElementById('fileDate').value.trim();
     document.getElementById('fileOut').value =
         "    {\n        title: '" + esc(title) + "',\n        category: '" + cat + "',\n        classLabel: '" + esc(cls) + "',\n        date: '" + esc(date) + "',\n        file: '" + esc(file) + "',\n        type: 'pdf'\n    },";
+}
+
+setupDropzone('photoDrop', 'photoFile', onPhotoPicked);
+setupDropzone('pdfDrop', 'pdfFile', onPdfPicked);
+
+document.getElementById('genPhoto').addEventListener('click', function () {
+    if (!document.getElementById('photoSrc').value.trim()) {
+        alert('Pehle photo choose karo ya path likho');
+        return;
+    }
+    generatePhotoCode();
 });
 
-document.querySelectorAll('.copy').forEach(function (btn) {
+document.getElementById('genFile').addEventListener('click', function () {
+    if (!document.getElementById('filePath').value.trim() || !document.getElementById('fileTitle').value.trim()) {
+        alert('Pehle PDF choose karo ya details bharo');
+        return;
+    }
+    generateFileCode();
+});
+
+['photoSrc', 'photoAlt', 'photoCat'].forEach(function (id) {
+    document.getElementById(id).addEventListener('input', generatePhotoCode);
+    document.getElementById(id).addEventListener('change', generatePhotoCode);
+});
+
+['filePath', 'fileTitle', 'fileClass', 'fileDate'].forEach(function (id) {
+    document.getElementById(id).addEventListener('input', generateFileCode);
+});
+document.getElementById('fileCat').addEventListener('change', function () {
+    updatePdfPath();
+    generateFileCode();
+});
+document.getElementById('fileTitle').addEventListener('input', function () {
+    this.dataset.auto = '0';
+});
+
+document.getElementById('copyPhotoPath').addEventListener('click', function () {
+    var p = document.getElementById('photoSrc').value.trim();
+    if (!p) return;
+    copyText(p, 'photoOk');
+});
+
+document.getElementById('copyPdfPath').addEventListener('click', function () {
+    var p = document.getElementById('filePath').value.trim();
+    if (!p) return;
+    copyText(p, 'fileOk');
+});
+
+function copyText(text, okId) {
+    navigator.clipboard.writeText(text).then(function () {
+        var ok = document.getElementById(okId);
+        ok.textContent = 'Copied!';
+        ok.style.display = 'block';
+        setTimeout(function () { ok.style.display = 'none'; }, 2000);
+    });
+}
+
+document.querySelectorAll('.copy[data-target]').forEach(function (btn) {
     btn.addEventListener('click', function () {
         var id = btn.getAttribute('data-target');
         var ta = document.getElementById(id);
+        if (!ta.value.trim()) {
+            alert('Pehle file choose karo');
+            return;
+        }
         ta.select();
-        navigator.clipboard.writeText(ta.value).then(function () {
-            var ok = document.getElementById(id === 'photoOut' ? 'photoOk' : 'fileOk');
-            ok.style.display = 'block';
-            setTimeout(function () { ok.style.display = 'none'; }, 2000);
-        });
+        copyText(ta.value, id === 'photoOut' ? 'photoOk' : 'fileOk');
     });
 });
 </script>
