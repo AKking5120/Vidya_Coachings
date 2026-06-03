@@ -6,7 +6,7 @@ window.VIDYA_GALLERY = [
     // Example:
     // { src: 'photo/photo201.jpeg', alt: 'Annual day 2026', cat: 'general' },
 
-
+// ALL PHOTOS
 { src: 'photo/photo1.jpeg', alt: 'Photo1', cat: 'general' },
 { src: 'photo/photo2.jpeg', alt: 'Photo2', cat: 'general' },
 { src: 'photo/photo3.jpeg', alt: 'Photo3', cat: 'general' },
@@ -233,5 +233,30 @@ window.VIDYA_GALLERY = [
 { src: 'photo/photo224.jpeg', alt: 'Photo224', cat: 'general' },
 { src: 'photo/photo225.jpeg', alt: 'Photo225', cat: 'general' },
 
+// STUDENT PHOTO
 
+
+
+
+
+
+
+
+
+
+
+// ALUMUNI
+
+
+
+
+
+
+
+
+
+//ACHIVMENT
+
+
+  
 ];
