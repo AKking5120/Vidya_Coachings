@@ -42,13 +42,14 @@ const REVIEWS_CONFIG = {
         return html;
     }
 
-    function renderReview(review) {
+    function renderReview(review, extraClass) {
         const name = escapeHtml(review.name || 'Anonymous');
         const role = escapeHtml(review.role || '');
         const text = escapeHtml(review.text || review.review || '');
+        const cls = extraClass ? ' ' + extraClass : '';
 
         return (
-            '<article class="review-card">' +
+            '<article class="review-card' + cls + '">' +
             '<div class="review-stars">' + starsHtml(review.rating) + '</div>' +
             '<p class="review-text">"' + text + '"</p>' +
             '<div class="review-author">' +
@@ -161,7 +162,44 @@ const REVIEWS_CONFIG = {
                 return;
             }
 
-            listEl.innerHTML = data.map(renderReview).join('');
+            const maxInitial = 6;
+            listEl.innerHTML = data.map(function(r, index) {
+                const isHidden = index >= maxInitial;
+                return renderReview(r, isHidden ? 'review-card-hidden' : '');
+            }).join('');
+
+            if (data.length > maxInitial) {
+                const showMoreContainer = document.createElement('div');
+                showMoreContainer.id = 'reviewsShowMoreContainer';
+                showMoreContainer.className = 'reviews-show-more-container';
+                showMoreContainer.innerHTML = '<button id="showMoreReviewsBtn" class="btn btn-outline" style="margin: 0 auto;">Show More Reviews <i class="fas fa-chevron-down" style="font-size: 0.85rem; margin-left: 4px;"></i></button>';
+                
+                listEl.appendChild(showMoreContainer);
+
+                const btn = document.getElementById('showMoreReviewsBtn');
+                let isExpanded = false;
+                btn.addEventListener('click', function() {
+                    isExpanded = !isExpanded;
+                    const cards = listEl.querySelectorAll('.review-card');
+                    cards.forEach(function(card, index) {
+                        if (index >= maxInitial) {
+                            if (isExpanded) {
+                                card.classList.remove('review-card-hidden');
+                            } else {
+                                card.classList.add('review-card-hidden');
+                            }
+                        }
+                    });
+
+                    if (isExpanded) {
+                        btn.innerHTML = 'Show Less Reviews <i class="fas fa-chevron-up" style="font-size: 0.85rem; margin-left: 4px;"></i>';
+                    } else {
+                        btn.innerHTML = 'Show More Reviews <i class="fas fa-chevron-down" style="font-size: 0.85rem; margin-left: 4px;"></i>';
+                        listEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            }
+
             updateSummary(data);
         } catch (err) {
             console.error('Reviews load error:', err);
