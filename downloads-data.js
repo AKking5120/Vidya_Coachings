@@ -21,4 +21,23 @@ window.VIDYA_DOWNLOADS = [
         file: 'downloads/notes/class10-history-chapter2.pdf',
         type: 'pdf'
     },
+
+    {
+        title: 'History Chapter The Age of Industrialisation',
+        category: 'notes',
+        classLabel: 'Class 10',
+        date: '2026',
+        file: 'downloads/notes/class10-sst-chapter-The_Age_of_Industrialisation',
+        type: 'pdf'
+    },
+
+
+    {
+        title: 'History Chapter Print Culture and the Modern World',
+        category: 'notes',
+        classLabel: 'Class 10',
+        date: '2026',
+        file: 'downloads/notes/class10-sst-chapter-Print_Culture_and_the_Modern _World ',
+        type: 'pdf'
+    },
 ];
