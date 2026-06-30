@@ -1,0 +1,181 @@
+/* ===== VIDYA COACHINGS - DOWNLOADS PAGE ===== */
+
+@import url('gallery.css');
+
+/* Downloads hero accent */
+.downloads-hero .gallery-hero-badge i {
+    color: var(--accent);
+}
+
+/* Download cards grid */
+.download-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.download-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 24px 20px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--gray-light);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.download-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 36px rgba(30, 58, 95, 0.15);
+}
+
+.download-icon {
+    width: 72px;
+    height: 72px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+}
+
+.download-icon i {
+    font-size: 2rem;
+    color: var(--white);
+}
+
+.download-card[data-type="notes"] .download-icon,
+.download-card.notes .download-icon {
+    background: linear-gradient(135deg, #059669, #10b981);
+}
+
+.download-badge {
+    display: inline-block;
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--accent-hover);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.download-card h3 {
+    color: var(--primary);
+    font-size: 1.05rem;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.download-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 14px;
+    margin-bottom: 18px;
+    width: 100%;
+}
+
+.download-meta span {
+    font-size: 0.8rem;
+    color: var(--gray);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.download-meta i {
+    color: var(--accent);
+    font-size: 0.75rem;
+}
+
+.download-actions {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin-top: auto;
+}
+
+.btn-download,
+.btn-view {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 12px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-download {
+    background: var(--accent);
+    color: var(--white);
+}
+
+.btn-download:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+}
+
+.btn-view {
+    background: var(--light);
+    color: var(--primary);
+    border: 1px solid var(--gray-light);
+}
+
+.btn-view:hover {
+    background: var(--primary);
+    color: var(--white);
+    border-color: var(--primary);
+}
+
+.downloads-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 50px 20px;
+    color: var(--gray);
+    background: var(--white);
+    border-radius: 12px;
+    border: 2px dashed var(--gray-light);
+}
+
+.downloads-empty i {
+    font-size: 2.5rem;
+    color: var(--accent);
+    margin-bottom: 12px;
+    display: block;
+}
+
+.downloads-tip {
+    max-width: 700px;
+    margin: 0 auto 32px;
+    padding: 16px 20px;
+    background: rgba(30, 58, 95, 0.06);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: var(--gray);
+}
+
+.downloads-tip strong {
+    color: var(--primary);
+}
+
+@media (max-width: 768px) {
+    .download-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .download-actions {
+        flex-direction: column;
+    }
+}
