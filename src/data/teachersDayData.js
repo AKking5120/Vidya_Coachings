@@ -36,7 +36,7 @@ export const TEACHERS = [
     branch: 'Branch 1, 2 & 3',
     avatar: 'AS',
     photo: null,
-    photos: [],
+    photos: ['teachers/amarpal-saini-1.jpeg'],
   },
   {
     id: 'mohit-singh',
