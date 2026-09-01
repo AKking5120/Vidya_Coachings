@@ -46,6 +46,18 @@ Open http://localhost:5173
 npm run build
 ```
 
+## Deploy to Vercel
+
+`vercel.json` is included — all routes (`/admin`, `/gallery`, `/teachers-day`, etc.) work correctly.
+
+1. Connect repo to Vercel
+2. Framework: **Vite**
+3. Build command: `npm run build`
+4. Output directory: `dist`
+5. Add environment variables in Vercel dashboard:
+   - `VITE_SUPABASE_URL`
+   - `VITE_SUPABASE_ANON_KEY`
+
 Deploy the `dist/` folder to Netlify, Vercel, or GitHub Pages.
 
 ## Admin Panel
