@@ -1,25 +1,52 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { fetchApprovedReviews, submitReview, isSupabaseConfigured } from '../lib/supabase';
 import { REVIEW_ROLES } from '../data/constants';
+import { LEGACY_REVIEWS } from '../data/legacyReviews';
 import SectionTitle from './SectionTitle';
 
 function Stars({ rating, interactive, value, onChange }) {
+  if (interactive) {
+    return (
+      <div className="star-picker" role="group" aria-label="Rating">
+        {[1, 2, 3, 4, 5].map((n) => (
+          <button
+            key={n}
+            type="button"
+            className={n <= value ? 'active' : ''}
+            aria-label={`${n} star${n > 1 ? 's' : ''}`}
+            onClick={() => onChange(n)}
+          >
+            <i className={n <= value ? 'fas fa-star' : 'far fa-star'} />
+          </button>
+        ))}
+      </div>
+    );
+  }
+
+  const r = Math.min(5, Math.max(0, rating || 0));
   return (
-    <div className={`stars ${interactive ? 'star-picker' : ''}`} role={interactive ? 'group' : undefined}>
+    <div className="review-stars" aria-label={`${r} out of 5 stars`}>
       {[1, 2, 3, 4, 5].map((n) => (
-        <button
-          key={n}
-          type={interactive ? 'button' : undefined}
-          className={interactive && n <= value ? 'active' : ''}
-          aria-label={`${n} star${n > 1 ? 's' : ''}`}
-          onClick={interactive ? () => onChange(n) : undefined}
-          disabled={!interactive}
-        >
-          <i className={n <= (interactive ? value : rating) ? 'fas fa-star' : 'far fa-star'} />
-        </button>
+        <i key={n} className={n <= r ? 'fas fa-star' : 'far fa-star'} />
       ))}
     </div>
   );
+}
+
+function mergeReviews(supabaseReviews) {
+  const seen = new Set();
+  const merged = [];
+
+  const add = (review) => {
+    const key = `${(review.name || '').toLowerCase()}|${(review.text || '').slice(0, 80).toLowerCase()}`;
+    if (seen.has(key)) return;
+    seen.add(key);
+    merged.push(review);
+  };
+
+  LEGACY_REVIEWS.forEach(add);
+  (supabaseReviews || []).forEach(add);
+  return merged;
 }
 
 function getInitials(name) {
@@ -36,18 +63,17 @@ export default function ReviewsSection() {
   const [submitting, setSubmitting] = useState(false);
 
   const load = async () => {
-    if (!isSupabaseConfigured) {
-      setError('Supabase not configured. Add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.');
-      setLoading(false);
-      return;
-    }
+    setLoading(true);
     try {
-      setLoading(true);
-      const data = await fetchApprovedReviews();
-      setReviews(data);
+      let supabaseReviews = [];
+      if (isSupabaseConfigured) {
+        supabaseReviews = await fetchApprovedReviews();
+      }
+      setReviews(mergeReviews(supabaseReviews));
       setError(null);
     } catch (err) {
-      setError('Could not load reviews. Please try again later.');
+      setReviews(mergeReviews([]));
+      setError(null);
       console.error(err);
     } finally {
       setLoading(false);
