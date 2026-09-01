@@ -7,10 +7,15 @@ main {
   min-height: 50vh;
 }
 
-/* Fix orange list-marker artifacts on nav and other lists */
+/* Global reset — kill orange list-marker artifacts */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 ul, ol {
   list-style: none;
   padding-left: 0;
+  margin: 0;
 }
 
 li::marker {
@@ -27,19 +32,56 @@ nav li {
   list-style: none;
 }
 
-/* Section accent line — horizontal bar only */
-.section-title .accent-line {
-  display: block;
-  width: 60px;
-  height: 4px;
-  min-height: 4px;
-  max-height: 4px;
-  background: var(--accent);
-  margin: 0 auto 15px;
-  border-radius: 2px;
-  flex-shrink: 0;
-  border: none;
-  padding: 0;
+/* Hide legacy accent-line if any remain */
+.accent-line {
+  display: none !important;
+}
+
+/* Modern section headings */
+.page-section-head {
+  text-align: center;
+  margin-bottom: 52px;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-eyebrow {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(245, 158, 11, 0.06));
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  padding: 6px 16px;
+  border-radius: 50px;
+  margin-bottom: 14px;
+}
+
+.section-heading {
+  font-size: clamp(1.75rem, 4vw, 2.35rem);
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1.25;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.section-subtitle {
+  color: var(--gray);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Modern sticky header */
+header {
+  background: rgba(15, 23, 42, 0.92) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .nav-links a.active {
@@ -610,4 +652,90 @@ nav li {
     flex-direction: row;
     width: 100%;
   }
+
+  .page-section-head {
+    margin-bottom: 36px;
+  }
+}
+
+/* ── Modern UI polish ── */
+.team-card,
+.director-card,
+.feature-box,
+.location-card,
+.review-card {
+  border-radius: 16px !important;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
+}
+
+.team-card:hover,
+.director-card:hover,
+.feature-box:hover,
+.location-card:hover,
+.review-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.1) !important;
+  border-color: rgba(245, 158, 11, 0.3) !important;
+}
+
+.stat-box {
+  border-radius: 16px !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.35);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.45) !important;
+}
+
+.btn-outline {
+  border: 2px solid var(--primary) !important;
+  color: var(--primary) !important;
+  background: transparent !important;
+}
+
+.btn-outline:hover {
+  background: var(--primary) !important;
+  color: #fff !important;
+}
+
+.review-form-box {
+  border-radius: 20px !important;
+  border: 1px solid var(--gray-light);
+  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.06) !important;
+}
+
+.query-box {
+  border-radius: 20px !important;
+  background: linear-gradient(135deg, var(--primary), #1e3a5f) !important;
+}
+
+.social-card {
+  border-radius: 16px !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.social-card:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+footer {
+  background: #0f172a !important;
+}
+
+/* Prevent gallery pseudo-elements leaking to page sections */
+.page-section-head::before,
+.page-section-head::after,
+.section-heading::before,
+.section-heading::after {
+  content: none !important;
+  display: none !important;
 }
