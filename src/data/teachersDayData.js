@@ -1,7 +1,8 @@
 /**
  * Teacher's Day — faculty tribute cards
  * Photo add karne ke liye: public/teachers/ folder mein images rakho
- * photos array mein paths do, e.g. photos: ['teachers/amarpal-saini-1.jpg', 'teachers/amarpal-saini-2.jpg']
+ * photos array mein paths do — public/ mat likho!
+ * Example: photos: ['teachers/amarpal-saini-1.jpeg']
  */
 export function getTeacherGalleryPhotos(teacher) {
   const paths = teacher.photos?.length
@@ -10,10 +11,13 @@ export function getTeacherGalleryPhotos(teacher) {
       ? [teacher.photo]
       : [];
 
-  return paths.map((path, i) => ({
-    src: `/${String(path).replace(/^\//, '')}`,
-    alt: `${teacher.name} — Photo ${i + 1}`,
-  }));
+  return paths.map((path, i) => {
+    const clean = String(path).replace(/^\//, '').replace(/^public\//, '');
+    return {
+      src: `/${clean}`,
+      alt: `${teacher.name} — Photo ${i + 1}`,
+    };
+  });
 }
 
 export const TEACHERS_DAY_TRIBUTE = {
@@ -36,7 +40,7 @@ export const TEACHERS = [
     branch: 'Branch 1, 2 & 3',
     avatar: 'AS',
     photo: null,
-    photos: ['public/teachers/amarpal-saini-1.jpeg'],
+    photos: ['teachers/amarpal-saini-1.jpeg'],
   },
   {
     id: 'mohit-singh',

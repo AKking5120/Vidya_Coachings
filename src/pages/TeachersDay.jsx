@@ -2,23 +2,30 @@ import { useState, useEffect, useCallback } from 'react';
 import { TEACHERS, TEACHERS_DAY_TRIBUTE, getTeacherGalleryPhotos } from '../data/teachersDayData';
 import SectionTitle from '../components/SectionTitle';
 
+function TeacherAvatar({ teacher, className = 'td-card-avatar' }) {
+  return (
+    <div className={className} aria-hidden="true">
+      {teacher.avatar}
+    </div>
+  );
+}
+
 function TeacherPhoto({ teacher, className = 'td-card-photo' }) {
   const photos = getTeacherGalleryPhotos(teacher);
-  if (photos.length > 0) {
-    return (
-      <img
-        src={photos[0].src}
-        alt={teacher.name}
-        className={className}
-        loading="lazy"
-      />
-    );
+  const [failed, setFailed] = useState(false);
+
+  if (!photos.length || failed) {
+    return <TeacherAvatar teacher={teacher} />;
   }
 
   return (
-    <div className="td-card-avatar" aria-hidden="true">
-      {teacher.avatar}
-    </div>
+    <img
+      src={photos[0].src}
+      alt={teacher.name}
+      className={className}
+      loading="lazy"
+      onError={() => setFailed(true)}
+    />
   );
 }
 
@@ -99,7 +106,7 @@ function TeacherGalleryModal({ teacher, startIndex, onClose }) {
           <div className="td-gallery-empty">
             <div className="td-gallery-empty-avatar">{teacher.avatar}</div>
             <p><i className="fas fa-images" /> Is teacher ki photos jaldi add hongi.</p>
-            <small>Admin: <code>public/teachers/</code> mein photo rakho aur <code>teachersDayData.js</code> mein <code>photos</code> array update karo.</small>
+            <small>Admin: photo <code>public/teachers/</code> folder mein rakho, data mein sirf <code>teachers/filename.jpeg</code> likho.</small>
           </div>
         )}
 
