@@ -1,8 +1,21 @@
 /**
  * Teacher's Day — faculty tribute cards
- * Photo add karne ke liye: public/teachers/ folder mein image rakho
- * aur photo field mein path do, e.g. 'teachers/amarpal-saini.jpg'
+ * Photo add karne ke liye: public/teachers/ folder mein images rakho
+ * photos array mein paths do, e.g. photos: ['teachers/amarpal-saini-1.jpg', 'teachers/amarpal-saini-2.jpg']
  */
+export function getTeacherGalleryPhotos(teacher) {
+  const paths = teacher.photos?.length
+    ? teacher.photos
+    : teacher.photo
+      ? [teacher.photo]
+      : [];
+
+  return paths.map((path, i) => ({
+    src: `/${String(path).replace(/^\//, '')}`,
+    alt: `${teacher.name} — Photo ${i + 1}`,
+  }));
+}
+
 export const TEACHERS_DAY_TRIBUTE = {
   title: "Happy Teacher's Day",
   subtitle: 'Guru Brahma, Guru Vishnu, Guru Devo Maheshwara — humare teachers ko dil se shukriya',
@@ -23,6 +36,7 @@ export const TEACHERS = [
     branch: 'Branch 1, 2 & 3',
     avatar: 'AS',
     photo: null,
+    photos: [],
   },
   {
     id: 'mohit-singh',
@@ -36,6 +50,7 @@ export const TEACHERS = [
     branch: 'Branch 1, 2 & 3',
     avatar: 'MS',
     photo: null,
+    photos: [],
   },
   {
     id: 'usman-ghani',
@@ -49,6 +64,7 @@ export const TEACHERS = [
     branch: 'Branch 2',
     avatar: 'UG',
     photo: null,
+    photos: [],
   },
   {
     id: 'gopal-chaudhary',
@@ -62,6 +78,7 @@ export const TEACHERS = [
     branch: 'Branch 2',
     avatar: 'GC',
     photo: null,
+    photos: [],
   },
   {
     id: 'aman-upadhyay',
@@ -75,6 +92,7 @@ export const TEACHERS = [
     branch: 'Branch 2',
     avatar: 'AU',
     photo: null,
+    photos: [],
   },
   {
     id: 'vivek-jha',
@@ -88,6 +106,7 @@ export const TEACHERS = [
     branch: 'Branch 2',
     avatar: 'VJ',
     photo: null,
+    photos: [],
   },
   {
     id: 'fatma',
@@ -101,6 +120,7 @@ export const TEACHERS = [
     branch: 'Branch 1 & 2',
     avatar: 'FM',
     photo: null,
+    photos: [],
   },
   {
     id: 'gaurav-singh',
@@ -114,6 +134,7 @@ export const TEACHERS = [
     branch: 'Branch 1 & 2',
     avatar: 'GS',
     photo: null,
+    photos: [],
   },
   {
     id: 'pooja-gupta',
@@ -127,6 +148,7 @@ export const TEACHERS = [
     branch: 'Branch 1 & 3',
     avatar: 'PG',
     photo: null,
+    photos: [],
   },
   {
     id: 'gulnaz',
@@ -140,6 +162,7 @@ export const TEACHERS = [
     branch: 'Branch 2',
     avatar: 'GM',
     photo: null,
+    photos: [],
   },
   {
     id: 'neetu-kumari',
@@ -153,6 +176,7 @@ export const TEACHERS = [
     branch: 'Branch 1 & 3',
     avatar: 'NK',
     photo: null,
+    photos: [],
   },
   {
     id: 'riya-gupta',
@@ -166,6 +190,7 @@ export const TEACHERS = [
     branch: 'Branch 1 & 3',
     avatar: 'RG',
     photo: null,
+    photos: [],
   },
   {
     id: 'bhawna',
@@ -179,5 +204,6 @@ export const TEACHERS = [
     branch: 'Branch 1 & 3',
     avatar: 'BM',
     photo: null,
+    photos: [],
   },
 ];
