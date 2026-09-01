@@ -5,6 +5,8 @@ import { fetchGalleryPhotos } from '../lib/supabase';
 import { getLocalImageUrl, getGithubImageUrl } from '../lib/githubImages';
 import { GALLERY_CATEGORIES } from '../data/constants';
 
+const PAGE_SIZE = 20;
+
 function buildPhoto(item, isGithub = false) {
   return {
     src: isGithub ? getGithubImageUrl(item.github_path || item.src) : getLocalImageUrl(item.src),
@@ -15,6 +17,7 @@ function buildPhoto(item, isGithub = false) {
 
 export default function Gallery() {
   const [activeTab, setActiveTab] = useState('all-photos');
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [lightbox, setLightbox] = useState(null);
   const [dynamicPhotos, setDynamicPhotos] = useState([]);
 
@@ -44,10 +47,18 @@ export default function Gallery() {
   }), [dynamicPhotos]);
 
   const currentPhotos = sections[activeTab] || [];
+  const visiblePhotos = currentPhotos.slice(0, visibleCount);
+  const hasMore = visibleCount < currentPhotos.length;
+
+  const handleTabChange = (tabId) => {
+    setActiveTab(tabId);
+    setVisibleCount(PAGE_SIZE);
+    setLightbox(null);
+  };
 
   const openLightbox = useCallback((index) => {
-    setLightbox({ index, photos: currentPhotos });
-  }, [currentPhotos]);
+    setLightbox({ index, photos: visiblePhotos });
+  }, [visiblePhotos]);
 
   const closeLightbox = () => setLightbox(null);
 
@@ -101,7 +112,7 @@ export default function Gallery() {
                 key={c.id}
                 type="button"
                 className={`tab-btn ${activeTab === c.id ? 'active' : ''}`}
-                onClick={() => setActiveTab(c.id)}
+                onClick={() => handleTabChange(c.id)}
               >
                 <i className={c.icon} /> {c.label}
                 <span className="tab-count">{counts[c.id]}</span>
@@ -115,15 +126,31 @@ export default function Gallery() {
         <div className="container">
           <h2 className="gallery-section-title">
             {GALLERY_CATEGORIES.find((c) => c.id === activeTab)?.label}
+            <span className="gallery-showing-count">
+              Showing {visiblePhotos.length} of {currentPhotos.length}
+            </span>
           </h2>
           <div className="photo-grid">
-            {currentPhotos.map((photo, i) => (
+            {visiblePhotos.map((photo, i) => (
               <button key={`${photo.src}-${i}`} type="button" className="photo-item" onClick={() => openLightbox(i)}>
                 <img src={photo.src} alt={photo.alt} loading="lazy" />
                 <div className="photo-overlay"><i className="fas fa-search-plus" /></div>
               </button>
             ))}
           </div>
+
+          {hasMore && (
+            <div className="gallery-load-more">
+              <button
+                type="button"
+                className="btn btn-outline"
+                onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
+              >
+                Load More Photos ({Math.min(PAGE_SIZE, currentPhotos.length - visibleCount)} more)
+                <i className="fas fa-chevron-down" />
+              </button>
+            </div>
+          )}
         </div>
       </section>
 

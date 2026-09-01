@@ -7,6 +7,41 @@ main {
   min-height: 50vh;
 }
 
+/* Fix orange list-marker artifacts on nav and other lists */
+ul, ol {
+  list-style: none;
+  padding-left: 0;
+}
+
+li::marker {
+  content: none;
+}
+
+nav ul,
+.nav-links,
+.mobile-menu {
+  list-style: none;
+}
+
+nav li {
+  list-style: none;
+}
+
+/* Section accent line — horizontal bar only */
+.section-title .accent-line {
+  display: block;
+  width: 60px;
+  height: 4px;
+  min-height: 4px;
+  max-height: 4px;
+  background: var(--accent);
+  margin: 0 auto 15px;
+  border-radius: 2px;
+  flex-shrink: 0;
+  border: none;
+  padding: 0;
+}
+
 .nav-links a.active {
   color: var(--accent);
 }
@@ -107,17 +142,16 @@ main {
   transform: scale(1.06);
 }
 
-.stars button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--accent);
-  font-size: 1.2rem;
-  padding: 2px;
+.review-stars i {
+  margin-right: 2px;
 }
 
-.star-picker button:not(.active) {
-  color: #cbd5e1;
+.star-picker button {
+  line-height: 1;
+}
+
+.star-picker button i {
+  pointer-events: none;
 }
 
 .review-count {
@@ -132,8 +166,40 @@ main {
 }
 
 .slider-dots .dot {
-  border: none;
+  border: 2px solid white;
   cursor: pointer;
+  padding: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.slider-dots .dot.active,
+.slider-dots .dot:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.gallery-load-more {
+  text-align: center;
+  padding: 32px 0 16px;
+}
+
+.gallery-showing-count {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--gray);
+  margin-top: 6px;
+}
+
+.gallery-section-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 /* Downloads improvements */
