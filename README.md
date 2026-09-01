@@ -50,7 +50,34 @@ Deploy the `dist/` folder to Netlify, Vercel, or GitHub Pages.
 
 ## Admin Panel
 
-Visit `/admin` and login with your admin password (set in Supabase `admin_config` table).
+Visit **`/admin`** on your website (e.g. `https://yoursite.com/admin`).
+
+### Login steps
+
+1. Open `/admin` in browser
+2. Enter your **admin password** (set in Supabase `admin_config` table)
+3. Default password after running schema: `change-me-vidya2026` — change it immediately:
+   ```sql
+   UPDATE admin_config SET value = 'your-secure-password' WHERE key = 'password';
+   ```
+
+### What you can do in Admin
+
+| Tab | Action |
+|-----|--------|
+| **Pending Reviews** | Approve or delete student/parent reviews |
+| **Gallery Photos** | View admin-added photos (from GitHub) |
+| **Add Photo** | Add new gallery photo by GitHub path |
+
+### Adding teacher photos (Teacher's Day page)
+
+1. Add image to `public/teachers/` folder (e.g. `amarpal-saini.jpg`)
+2. Edit `src/data/teachersDayData.js` — set `photo: 'teachers/amarpal-saini.jpg'` for that teacher
+3. Rebuild and deploy
+
+## Teacher's Day Page
+
+Visit **`/teachers-day`** — tribute page with teacher cards showing subject, best quality, and tribute line.
 
 ### Adding a new photo
 

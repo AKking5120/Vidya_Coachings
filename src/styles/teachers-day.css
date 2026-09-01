@@ -1,0 +1,286 @@
+/* Teacher's Day Page */
+.td-hero {
+  position: relative;
+  padding: calc(var(--header-height) + 70px) 20px 80px;
+  text-align: center;
+  color: #fff;
+  background: linear-gradient(135deg, #7c2d12 0%, #c2410c 35%, #ea580c 65%, #f59e0b 100%);
+  overflow: hidden;
+}
+
+.td-hero-bg {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+.td-hero-bg i {
+  font-size: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.td-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.td-hero-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 8px 18px;
+  border-radius: 50px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-bottom: 18px;
+  backdrop-filter: blur(8px);
+}
+
+.td-hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+
+.td-hero-sub {
+  font-size: 1.1rem;
+  opacity: 0.95;
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+
+.td-hero-message {
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  padding: 24px 28px;
+  text-align: left;
+  backdrop-filter: blur(10px);
+}
+
+.td-hero-message i {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.td-hero-message p {
+  margin: 0;
+  line-height: 1.75;
+  font-size: 1.02rem;
+}
+
+.td-tribute-section {
+  background: linear-gradient(180deg, #fff7ed 0%, #ffffff 100%);
+}
+
+.td-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 28px;
+}
+
+.td-card {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid #fed7aa;
+  box-shadow: 0 8px 30px rgba(234, 88, 12, 0.08);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.td-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(234, 88, 12, 0.15);
+}
+
+.td-card-image-wrap {
+  position: relative;
+  height: 200px;
+  background: linear-gradient(135deg, #1e3a5f, #334155);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.td-card-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.td-card-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f59e0b, #ea580c);
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.td-card-badge {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: rgba(15, 23, 42, 0.85);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 50px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.td-card-body {
+  padding: 22px 22px 24px;
+}
+
+.td-card-role {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #ea580c;
+  margin-bottom: 4px;
+}
+
+.td-card-body h3 {
+  font-size: 1.2rem;
+  color: var(--primary);
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.td-card-subject {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 14px;
+  font-size: 0.9rem;
+  color: var(--dark);
+  line-height: 1.5;
+}
+
+.td-card-subject i {
+  color: var(--primary);
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+.td-card-quality {
+  margin-bottom: 14px;
+}
+
+.td-card-quality strong {
+  display: block;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #b45309;
+  margin-bottom: 4px;
+}
+
+.td-card-quality p {
+  font-size: 0.92rem;
+  color: var(--gray);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.td-card-tribute {
+  margin: 0 0 16px;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, #fff7ed, #ffedd5);
+  border-left: 4px solid #f59e0b;
+  border-radius: 0 12px 12px 0;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: #9a3412;
+  line-height: 1.6;
+}
+
+.td-card-tribute i {
+  display: block;
+  font-size: 0.8rem;
+  opacity: 0.5;
+  margin-bottom: 6px;
+}
+
+.td-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.82rem;
+  color: var(--gray);
+}
+
+.td-card-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.td-card-meta i {
+  color: #f59e0b;
+}
+
+.td-closing {
+  padding: 60px 20px 90px;
+  background: var(--primary);
+}
+
+.td-closing-box {
+  text-align: center;
+  color: #fff;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.td-closing-box i {
+  font-size: 2.5rem;
+  color: #f59e0b;
+  margin-bottom: 16px;
+}
+
+.td-closing-box h2 {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  margin-bottom: 14px;
+}
+
+.td-closing-box p {
+  opacity: 0.9;
+  line-height: 1.75;
+  font-size: 1.05rem;
+}
+
+@media (max-width: 640px) {
+  .td-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .td-hero-message {
+    padding: 18px 20px;
+  }
+}

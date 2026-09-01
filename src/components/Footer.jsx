@@ -16,6 +16,7 @@ export default function Footer() {
             <Link to="/#programs">Programs</Link>
             <Link to="/gallery">Gallery</Link>
             <Link to="/downloads">Downloads</Link>
+            <Link to="/teachers-day">Teacher&apos;s Day</Link>
             <Link to="/#reviews">Reviews</Link>
             <Link to="/#contact">Contact</Link>
             <Link to="/#query">Admission Form</Link>

@@ -1,6 +1,7 @@
 @import '../../style.css';
 @import '../../gallery.css';
 @import '../../downloads.css';
+@import './teachers-day.css';
 
 /* React app overrides & improvements */
 main {
