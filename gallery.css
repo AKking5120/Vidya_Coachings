@@ -318,7 +318,8 @@ nav {
     to { opacity: 1; transform: translateY(0); }
 }
 
-.section-title {
+.section-block .gallery-section-title,
+.gallery-section-title {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--primary);
@@ -328,12 +329,13 @@ nav {
     gap: 10px;
 }
 
-.section-title::before {
+.gallery-section-title::before {
     content: '';
     width: 4px;
     height: 28px;
     background: var(--accent);
     border-radius: 2px;
+    flex-shrink: 0;
 }
 
 .photo-grid {
@@ -604,7 +606,7 @@ footer .tagline {
         gap: 10px;
     }
 
-    .section-title {
+    .gallery-section-title {
         font-size: 1.25rem;
     }
 
