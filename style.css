@@ -506,6 +506,12 @@ nav {
     font-weight: 900;
 }
 
+@media (max-width: 768px) {
+    .hero h1 .highlight {
+        white-space: normal;
+    }
+}
+
 .hero-tagline {
     font-size: clamp(1rem, 2.5vw, 1.25rem);
     color: rgba(30, 58, 95, 0.85);
