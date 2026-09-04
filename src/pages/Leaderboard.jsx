@@ -54,9 +54,11 @@ export default function Leaderboard() {
           <div className="page-hero-badge"><i className="fas fa-trophy" /> Top Students</div>
           <h1>Leaderboard</h1>
           <p>Highest quiz scores from Vidya Coachings Study Game</p>
-          <Link to="/study-game" className="btn btn-primary" style={{ marginTop: 16 }}>
-            <i className="fas fa-gamepad" /> Play Study Game
-          </Link>
+          <div className="study-game-hero-actions">
+            <Link to="/study-game" className="btn btn-primary">
+              <i className="fas fa-gamepad" /> Play Study Game
+            </Link>
+          </div>
         </div>
       </section>
 

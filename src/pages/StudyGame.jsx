@@ -151,9 +151,11 @@ export default function StudyGame() {
           <div className="page-hero-badge"><i className="fas fa-gamepad" /> Learn &amp; Play</div>
           <h1>Study Game</h1>
           <p>Test your knowledge with fun quizzes — Math, Science, English &amp; GK</p>
-          <Link to="/leaderboard" className="btn btn-outline" style={{ marginTop: 12, color: '#fff', borderColor: 'rgba(255,255,255,0.5)' }}>
-            <i className="fas fa-trophy" /> View Leaderboard
-          </Link>
+          <div className="study-game-hero-actions">
+            <Link to="/leaderboard" className="btn btn-outline-light">
+              <i className="fas fa-trophy" /> View Leaderboard
+            </Link>
+          </div>
         </div>
       </section>
 
