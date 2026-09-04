@@ -178,3 +178,33 @@ export async function adminToggleNotice(noticeId, adminKey) {
   });
   if (error) throw error;
 }
+
+export async function submitQuizScore({ playerName, level, subject, score, totalQuestions, percent, bestStreak }) {
+  if (!supabase) throw new Error('Supabase not configured');
+  const { error } = await supabase.from('quiz_scores').insert({
+    player_name: playerName.trim(),
+    level,
+    subject,
+    score,
+    total_questions: totalQuestions,
+    percent,
+    best_streak: bestStreak || 0,
+  });
+  if (error) throw error;
+}
+
+export async function fetchLeaderboard({ level, subject, limit = 50 } = {}) {
+  if (!supabase) return [];
+  let query = supabase
+    .from('quiz_scores')
+    .select('*')
+    .order('percent', { ascending: false })
+    .order('score', { ascending: false })
+    .order('created_at', { ascending: false })
+    .limit(limit);
+  if (level && level !== 'all') query = query.eq('level', level);
+  if (subject && subject !== 'all') query = query.eq('subject', subject);
+  const { data, error } = await query;
+  if (error) throw error;
+  return data || [];
+}

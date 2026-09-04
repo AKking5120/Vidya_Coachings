@@ -4,6 +4,8 @@ import Home from './pages/Home';
 import Gallery from './pages/Gallery';
 import Downloads from './pages/Downloads';
 import TeachersDay from './pages/TeachersDay';
+import StudyGame from './pages/StudyGame';
+import Leaderboard from './pages/Leaderboard';
 import Admin from './pages/Admin';
 
 export default function App() {
@@ -14,6 +16,8 @@ export default function App() {
         <Route path="gallery" element={<Gallery />} />
         <Route path="downloads" element={<Downloads />} />
         <Route path="teachers-day" element={<TeachersDay />} />
+        <Route path="study-game" element={<StudyGame />} />
+        <Route path="leaderboard" element={<Leaderboard />} />
         <Route path="admin" element={<Admin />} />
       </Route>
     </Routes>
