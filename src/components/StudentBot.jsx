@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { SITE } from '../data/constants';
-import { BOT_NAME, QUICK_PROMPTS, getBotResponse, getWelcomeMessage } from '../data/studentBotKnowledge';
+import { askStudyBuddyAI, isAiConfiguredHint } from '../lib/studentChatApi';
+import { BOT_NAME, QUICK_PROMPTS, getFaqResponse, getBotResponse, getWelcomeMessage } from '../data/studentBotKnowledge';
 
 function BotAction({ action, onPrompt }) {
   if (action.type === 'link') {
@@ -119,24 +120,70 @@ export default function StudentBot() {
     return () => document.body.classList.remove('student-bot-open');
   }, [open]);
 
-  const sendMessage = useCallback((text) => {
+  const sendMessage = useCallback(async (text) => {
     const trimmed = text.trim();
     if (!trimmed) return;
 
     const userMsg = { id: `u-${Date.now()}`, role: 'user', text: trimmed };
-    setMessages((prev) => [...prev, userMsg]);
+    setMessages((prev) => {
+      const next = [...prev, userMsg];
+      return next;
+    });
     setInput('');
     setTyping(true);
 
-    window.setTimeout(() => {
-      const reply = getBotResponse(trimmed);
+    const faq = getFaqResponse(trimmed);
+    if (faq) {
+      window.setTimeout(() => {
+        setMessages((prev) => [
+          ...prev,
+          { id: `b-${Date.now()}`, role: 'bot', text: faq.text, actions: faq.actions },
+        ]);
+        setTyping(false);
+      }, 350);
+      return;
+    }
+
+    try {
+      const history = [
+        ...messages.filter((m) => m.role === 'user' || m.role === 'bot'),
+        { role: 'user', text: trimmed },
+      ]
+        .slice(-8)
+        .map((m) => ({ role: m.role, text: m.text }));
+
+      const aiText = await askStudyBuddyAI(trimmed, history);
       setMessages((prev) => [
         ...prev,
-        { id: `b-${Date.now()}`, role: 'bot', text: reply.text, actions: reply.actions },
+        {
+          id: `b-${Date.now()}`,
+          role: 'bot',
+          text: aiText,
+          actions: [
+            { type: 'prompt', label: 'Explain simpler', text: `Explain simpler: ${trimmed}`, icon: 'fas fa-lightbulb' },
+            { type: 'link', label: 'Practice Quiz', href: '/study-game', icon: 'fas fa-gamepad' },
+          ],
+        },
       ]);
+    } catch (err) {
+      const fallback = getBotResponse(trimmed);
+      const hint = isAiConfiguredHint(err)
+        ? 'AI abhi setup nahi hai — admin ko GEMINI_API_KEY add karni hogi (free key: aistudio.google.com/apikey).'
+        : 'AI thodi der ke liye busy hai.';
+
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `b-${Date.now()}`,
+          role: 'bot',
+          text: `${hint}\n\n${fallback.text}`,
+          actions: fallback.actions,
+        },
+      ]);
+    } finally {
       setTyping(false);
-    }, 450);
-  }, []);
+    }
+  }, [messages]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -155,7 +202,7 @@ export default function StudentBot() {
             </div>
             <div>
               <strong>{BOT_NAME}</strong>
-              <span>Student helper • Online</span>
+              <span>AI doubt solver • Online</span>
             </div>
           </div>
           <button type="button" className="student-bot-close" onClick={() => setOpen(false)} aria-label="Close chat">
@@ -193,7 +240,7 @@ export default function StudentBot() {
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Apna sawaal likho..."
+            placeholder="Padhai ka doubt likho..."
             maxLength={500}
             autoComplete="off"
           />

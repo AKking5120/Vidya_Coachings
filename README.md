@@ -58,8 +58,29 @@ npm run build
 5. Add environment variables in Vercel dashboard:
    - `VITE_SUPABASE_URL`
    - `VITE_SUPABASE_ANON_KEY`
+   - `GEMINI_API_KEY` — **free** key from [Google AI Studio](https://aistudio.google.com/apikey) (powers student doubt-solving bot)
 
 Deploy the `dist/` folder to Netlify, Vercel, or GitHub Pages.
+
+## Student Bot (AI Doubt Solver)
+
+The **Vidya Study Buddy** chatbot (bottom-left on site) uses:
+
+1. **Instant FAQ** — admission, branches, contact, Study Game
+2. **Google Gemini (free tier)** — solves Math, Science, English doubts in Hinglish
+
+### Setup Gemini (free)
+
+1. Go to [aistudio.google.com/apikey](https://aistudio.google.com/apikey)
+2. Create a free API key (no credit card for basic tier)
+3. In **Vercel** → Project → Settings → Environment Variables:
+   - Name: `GEMINI_API_KEY`
+   - Value: your key
+4. Redeploy the site
+
+> **Important:** Never put `GEMINI_API_KEY` in `.env` with `VITE_` prefix — it would be exposed in the browser. The key stays server-side in `/api/student-chat`.
+
+For local API testing, run `npx vercel dev` (not just `npm run dev`).
 
 ## Admin Panel
 

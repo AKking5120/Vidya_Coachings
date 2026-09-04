@@ -3,6 +3,7 @@ import { SITE } from './constants';
 export const BOT_NAME = 'Vidya Study Buddy';
 
 export const QUICK_PROMPTS = [
+  { id: 'doubt', label: 'Doubt', text: 'Explain photosynthesis in simple words' },
   { id: 'admission', label: 'Admission', text: 'How do I take admission?' },
   { id: 'classes', label: 'Classes', text: 'Which classes do you teach?' },
   { id: 'branches', label: 'Branches', text: 'Where are your branches?' },
@@ -42,7 +43,7 @@ function pickTip() {
 
 function greetingReply() {
   return {
-    text: `Namaste! Main ${BOT_NAME} hoon — Vidya Coachings ka student helper.\n\nMain admission, classes, branches, Study Game aur study tips mein help kar sakta hoon. Neeche quick buttons try karo ya apna sawaal likho!`,
+    text: `Namaste! Main ${BOT_NAME} hoon — Vidya Coachings ka student helper.\n\n✅ Padhai ke doubts solve karo (Math, Science, English…)\n✅ Admission, classes, branches — instant answers\n\nNeeche quick buttons try karo ya apna sawaal likho!`,
     actions: [
       { type: 'link', label: 'Play Study Game', href: '/study-game', icon: 'fas fa-gamepad' },
       { type: 'link', label: 'Admission Form', href: 'https://forms.gle/J7kSgvwpFc1261At5', external: true, icon: 'fas fa-file-alt' },
@@ -173,7 +174,7 @@ const RULES = [
   },
 ];
 
-export function getBotResponse(userText) {
+export function getFaqResponse(userText) {
   const text = normalize(userText);
   if (!text) return { text: 'Kuch likh kar bhejo — main help karunga!' };
 
@@ -184,11 +185,19 @@ export function getBotResponse(userText) {
     }
   }
 
+  return null;
+}
+
+export function getBotResponse(userText) {
+  const faq = getFaqResponse(userText);
+  if (faq) return faq;
+
   return {
-    text: `Sorry, yeh sawaal samajh nahi aaya. Try karo:\n• "Admission kaise karein?"\n• "Classes kya hain?"\n• "Study Game"\n• "Branches kahan hain?"\n\nYa seedha team se baat karo:`,
+    text: `Abhi AI doubt solver connect nahi hai. Admin ko GEMINI_API_KEY add karni hogi (free: aistudio.google.com/apikey).\n\nTab tak yeh try karo ya WhatsApp karo:`,
     actions: [
       { type: 'whatsapp', label: 'WhatsApp', message: userText, icon: 'fab fa-whatsapp' },
       { type: 'call', label: 'Call', icon: 'fas fa-phone' },
+      { type: 'link', label: 'Study Game', href: '/study-game', icon: 'fas fa-gamepad' },
     ],
   };
 }
