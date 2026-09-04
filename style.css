@@ -1738,13 +1738,19 @@ footer .tagline {
         padding: 0 16px;
     }
 
+    header.site-header .container {
+        padding-left: 8px;
+        padding-right: 10px;
+    }
+
     .logo-img {
-        height: 40px;
-        width: 40px;
+        height: 36px;
+        width: 36px;
     }
 
     .logo-text {
-        font-size: 1.15rem;
+        font-size: 0.92rem;
+        line-height: 1.1;
     }
 
     nav {
