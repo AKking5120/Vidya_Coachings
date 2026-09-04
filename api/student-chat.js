@@ -15,7 +15,7 @@ Rules:
 - If unsure, say "Yeh topic detail mein teacher se poochna better hoga" and encourage asking in class.
 - End with encouragement when helpful.`;
 
-const MODELS = ['gemini-2.5-flash-lite', 'gemini-2.5-flash', 'gemini-flash-latest'];
+const MODELS = ['gemini-flash-latest', 'gemini-3.5-flash-lite', 'gemini-3.6-flash'];
 
 function setCors(res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
