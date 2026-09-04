@@ -3,19 +3,15 @@
  * Set GEMINI_API_KEY in Vercel env (get free key: https://aistudio.google.com/apikey)
  */
 
-const SYSTEM_PROMPT = `You are Vidya Study Buddy, a friendly tutor for students at Vidya Coachings tuition centre in Badarpur & Jaitpur, Delhi (Class 1 to 12).
+const SYSTEM_PROMPT = `You are Vidya Study Buddy for Vidya Coachings students (Class 1-12, Delhi).
+Reply in simple Hinglish. Be SHORT: 60-120 words max.
+Math: show key steps. Science: one simple example.
+For admission/fees/contact mention WhatsApp +91 98717 49012.
+No exam cheating. Encourage learning.`;
 
-Rules:
-- Answer study doubts clearly in simple Hinglish (natural mix of Hindi and English).
-- Keep answers concise: usually 80–180 words. Use short paragraphs or bullet points.
-- For Math: show step-by-step solution. For Science: use simple real-life examples.
-- For English/GK: explain in easy language suitable for school students.
-- If the question is about admission, fees, timings, or contact — briefly answer and say they can also WhatsApp Vidya Coachings at +91 98717 49012.
-- Do NOT help cheat on live exams or share inappropriate content.
-- If unsure, say "Yeh topic detail mein teacher se poochna better hoga" and encourage asking in class.
-- End with encouragement when helpful.`;
-
-const MODELS = ['gemini-flash-latest', 'gemini-3.5-flash-lite', 'gemini-3.6-flash'];
+const PRIMARY_MODEL = 'gemini-flash-latest';
+const FALLBACK_MODEL = 'gemini-3.5-flash-lite';
+const REQUEST_TIMEOUT_MS = 12000;
 
 function setCors(res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -23,14 +19,34 @@ function setCors(res) {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 }
 
+async function fetchGemini(apiKey, model, body) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+
+  try {
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+      signal: controller.signal,
+    });
+
+    const data = await response.json();
+    return { ok: response.ok, status: response.status, data };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 async function callGemini(apiKey, message, history) {
   const contents = [];
 
-  for (const item of history.slice(-8)) {
+  for (const item of history.slice(-4)) {
     if (!item?.text?.trim()) continue;
     contents.push({
       role: item.role === 'user' ? 'user' : 'model',
-      parts: [{ text: item.text.trim() }],
+      parts: [{ text: item.text.trim().slice(0, 400) }],
     });
   }
 
@@ -43,33 +59,32 @@ async function callGemini(apiKey, message, history) {
     system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
     contents,
     generationConfig: {
-      maxOutputTokens: 700,
-      temperature: 0.65,
+      maxOutputTokens: 320,
+      temperature: 0.4,
     },
   };
 
+  const models = [PRIMARY_MODEL, FALLBACK_MODEL];
   let lastError = null;
 
-  for (const model of MODELS) {
+  for (const model of models) {
     try {
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      });
+      const { ok, status, data } = await fetchGemini(apiKey, model, body);
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        lastError = data?.error?.message || `Gemini ${model} failed (${response.status})`;
-        continue;
+      if (!ok) {
+        lastError = data?.error?.message || `Gemini ${model} failed (${status})`;
+        if (status === 404 || status === 400) continue;
+        if (status === 503 && model === PRIMARY_MODEL) continue;
+        throw new Error(lastError);
       }
 
       const text = data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
       if (text) return { text, model };
       lastError = 'Empty response from AI';
     } catch (err) {
+      if (err.name === 'AbortError') {
+        throw new Error('Request timed out — please try again');
+      }
       lastError = err.message;
     }
   }
@@ -102,8 +117,8 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Message is required' });
   }
 
-  if (message.length > 800) {
-    return res.status(400).json({ error: 'Message too long (max 800 characters)' });
+  if (message.length > 500) {
+    return res.status(400).json({ error: 'Message too long (max 500 characters)' });
   }
 
   try {

@@ -3,28 +3,43 @@
  */
 
 export async function askStudyBuddyAI(message, history = []) {
-  const response = await fetch('/api/student-chat', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      message,
-      history: history.map((m) => ({
-        role: m.role === 'user' ? 'user' : 'model',
-        text: m.text,
-      })),
-    }),
-  });
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 14000);
 
-  const data = await response.json().catch(() => ({}));
+  try {
+    const response = await fetch('/api/student-chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message,
+        history: history.map((m) => ({
+          role: m.role === 'user' ? 'user' : 'model',
+          text: m.text,
+        })),
+      }),
+      signal: controller.signal,
+    });
 
-  if (!response.ok) {
-    const err = new Error(data.message || data.error || 'AI request failed');
-    err.status = response.status;
-    err.code = data.error;
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      const err = new Error(data.message || data.error || 'AI request failed');
+      err.status = response.status;
+      err.code = data.error;
+      throw err;
+    }
+
+    return data.text;
+  } catch (err) {
+    if (err.name === 'AbortError') {
+      const timeoutErr = new Error('Response took too long — please try again');
+      timeoutErr.status = 408;
+      throw timeoutErr;
+    }
     throw err;
+  } finally {
+    clearTimeout(timer);
   }
-
-  return data.text;
 }
 
 export function isAiConfiguredHint(error) {
