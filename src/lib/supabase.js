@@ -112,10 +112,12 @@ export async function fetchActiveNotices() {
   const { data, error } = await supabase
     .from('notices')
     .select('*')
+    .eq('active', true)
     .order('priority', { ascending: false })
     .order('created_at', { ascending: false });
   if (error) throw error;
-  return data || [];
+  const now = Date.now();
+  return (data || []).filter((n) => !n.expires_at || new Date(n.expires_at).getTime() > now);
 }
 
 export async function adminListNotices(adminKey) {

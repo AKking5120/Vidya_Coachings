@@ -743,8 +743,10 @@ footer {
 
 /* ── Alert & Notice Banner ── */
 .notice-banner-stack {
-  position: relative;
-  z-index: 900;
+  position: sticky;
+  top: var(--header-height);
+  z-index: 999;
+  margin-top: var(--header-height);
 }
 
 .notice-banner {
