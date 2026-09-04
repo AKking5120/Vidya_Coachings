@@ -162,6 +162,7 @@ GRANT EXECUTE ON FUNCTION admin_delete_gallery_photo(UUID, TEXT) TO anon, authen
 GRANT EXECUTE ON FUNCTION admin_list_gallery_photos(TEXT) TO anon, authenticated;
 
 -- Site alerts & notices
+-- For existing projects, run supabase/notices.sql instead of re-running this block.
 CREATE TABLE IF NOT EXISTS notices (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   title TEXT NOT NULL,
@@ -189,14 +190,14 @@ RETURNS SETOF notices
 LANGUAGE plpgsql
 SECURITY DEFINER
 SET search_path = public
-AS $$
+AS $fn$
 BEGIN
   IF NOT verify_admin_key(admin_key) THEN
     RAISE EXCEPTION 'Unauthorized';
   END IF;
   RETURN QUERY SELECT * FROM notices ORDER BY priority DESC, created_at DESC;
 END;
-$$;
+$fn$;
 
 CREATE OR REPLACE FUNCTION admin_add_notice(
   p_title TEXT,
@@ -212,7 +213,7 @@ RETURNS VOID
 LANGUAGE plpgsql
 SECURITY DEFINER
 SET search_path = public
-AS $$
+AS $fn$
 BEGIN
   IF NOT verify_admin_key(admin_key) THEN
     RAISE EXCEPTION 'Unauthorized';
@@ -228,7 +229,7 @@ BEGIN
     p_expires_at
   );
 END;
-$$;
+$fn$;
 
 CREATE OR REPLACE FUNCTION admin_update_notice(
   p_id UUID,
@@ -246,7 +247,7 @@ RETURNS VOID
 LANGUAGE plpgsql
 SECURITY DEFINER
 SET search_path = public
-AS $$
+AS $fn$
 BEGIN
   IF NOT verify_admin_key(admin_key) THEN
     RAISE EXCEPTION 'Unauthorized';
@@ -262,35 +263,35 @@ BEGIN
     expires_at = p_expires_at
   WHERE id = p_id;
 END;
-$$;
+$fn$;
 
 CREATE OR REPLACE FUNCTION admin_delete_notice(notice_id UUID, admin_key TEXT)
 RETURNS VOID
 LANGUAGE plpgsql
 SECURITY DEFINER
 SET search_path = public
-AS $$
+AS $fn$
 BEGIN
   IF NOT verify_admin_key(admin_key) THEN
     RAISE EXCEPTION 'Unauthorized';
   END IF;
   DELETE FROM notices WHERE id = notice_id;
 END;
-$$;
+$fn$;
 
 CREATE OR REPLACE FUNCTION admin_toggle_notice(notice_id UUID, admin_key TEXT)
 RETURNS VOID
 LANGUAGE plpgsql
 SECURITY DEFINER
 SET search_path = public
-AS $$
+AS $fn$
 BEGIN
   IF NOT verify_admin_key(admin_key) THEN
     RAISE EXCEPTION 'Unauthorized';
   END IF;
   UPDATE notices SET active = NOT active WHERE id = notice_id;
 END;
-$$;
+$fn$;
 
 GRANT EXECUTE ON FUNCTION admin_list_notices(TEXT) TO anon, authenticated;
 GRANT EXECUTE ON FUNCTION admin_add_notice(TEXT, TEXT, TEXT, INTEGER, TEXT, TEXT, TIMESTAMPTZ, TEXT) TO anon, authenticated;
