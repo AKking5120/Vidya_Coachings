@@ -134,13 +134,11 @@ export default function StudentBot() {
 
     const faq = getFaqResponse(trimmed);
     if (faq) {
-      window.setTimeout(() => {
-        setMessages((prev) => [
-          ...prev,
-          { id: `b-${Date.now()}`, role: 'bot', text: faq.text, actions: faq.actions },
-        ]);
-        setTyping(false);
-      }, 350);
+      setMessages((prev) => [
+        ...prev,
+        { id: `b-${Date.now()}`, role: 'bot', text: faq.text, actions: faq.actions },
+      ]);
+      setTyping(false);
       return;
     }
 
@@ -149,7 +147,7 @@ export default function StudentBot() {
         ...messages.filter((m) => m.role === 'user' || m.role === 'bot'),
         { role: 'user', text: trimmed },
       ]
-        .slice(-8)
+        .slice(-4)
         .map((m) => ({ role: m.role, text: m.text }));
 
       const aiText = await askStudyBuddyAI(trimmed, history);
@@ -160,7 +158,6 @@ export default function StudentBot() {
           role: 'bot',
           text: aiText,
           actions: [
-            { type: 'prompt', label: 'Explain simpler', text: `Explain simpler: ${trimmed}`, icon: 'fas fa-lightbulb' },
             { type: 'link', label: 'Practice Quiz', href: '/study-game', icon: 'fas fa-gamepad' },
           ],
         },
@@ -241,7 +238,7 @@ export default function StudentBot() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Padhai ka doubt likho..."
-            maxLength={500}
+            maxLength={400}
             autoComplete="off"
           />
           <button type="submit" className="student-bot-send" aria-label="Send message" disabled={!input.trim()}>
