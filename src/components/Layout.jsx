@@ -6,6 +6,7 @@ import WhatsAppFloat from './WhatsAppFloat';
 import ScrollTop from './ScrollTop';
 import NoticeBanner from './NoticeBanner';
 import ScrollReveal from './ScrollReveal';
+import StudentBot from './StudentBot';
 
 export default function Layout() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -25,6 +26,7 @@ export default function Layout() {
         <Outlet />
       </main>
       <Footer />
+      <StudentBot />
       <WhatsAppFloat />
       <ScrollTop />
     </>
