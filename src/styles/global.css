@@ -2,6 +2,7 @@
 @import '../../gallery.css';
 @import '../../downloads.css';
 @import './teachers-day.css';
+@import './study-game.css';
 
 /* React app overrides & improvements */
 main {

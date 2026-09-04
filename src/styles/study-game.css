@@ -1,0 +1,340 @@
+/* Study Game */
+.study-game-hero {
+  background: linear-gradient(135deg, #0f172a 0%, #312e81 50%, #4c1d95 100%) !important;
+}
+
+.study-game-section {
+  padding: 48px 0 80px;
+  background: #f8fafc;
+  min-height: 50vh;
+}
+
+.sg-level-block {
+  margin-bottom: 40px;
+}
+
+.sg-level-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sg-level-title--orange { color: #c2410c; }
+.sg-level-title--blue { color: #1d4ed8; }
+.sg-level-title--purple { color: #7c3aed; }
+
+.sg-subject-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 14px;
+}
+
+.sg-subject-card {
+  background: #fff;
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 20px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  font-family: inherit;
+}
+
+.sg-subject-card i {
+  font-size: 1.6rem;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.sg-subject-card span {
+  display: block;
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 1rem;
+}
+
+.sg-subject-card small {
+  display: block;
+  margin-top: 4px;
+  color: var(--gray);
+  font-size: 0.78rem;
+}
+
+.sg-subject-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.15);
+}
+
+/* Quiz */
+.sg-quiz {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.sg-quiz-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.sg-quiz-meta,
+.sg-quiz-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.sg-badge {
+  background: #ede9fe;
+  color: #5b21b6;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 50px;
+}
+
+.sg-quiz-stats span {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.sg-streak {
+  color: #ea580c !important;
+}
+
+.sg-timer {
+  color: #1d4ed8 !important;
+}
+
+.sg-timer.urgent {
+  color: #dc2626 !important;
+  animation: sg-pulse 0.8s infinite;
+}
+
+@keyframes sg-pulse {
+  50% { opacity: 0.6; }
+}
+
+.sg-progress {
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 50px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.sg-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), #fbbf24);
+  border-radius: 50px;
+  transition: width 0.4s ease;
+}
+
+.sg-q-count {
+  font-size: 0.82rem;
+  color: var(--gray);
+  margin-bottom: 16px;
+}
+
+.sg-question-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px 24px;
+  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.08);
+  border: 1px solid #e2e8f0;
+}
+
+.sg-question {
+  font-size: clamp(1.1rem, 3vw, 1.35rem);
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1.45;
+  margin-bottom: 24px;
+}
+
+.sg-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sg-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  text-align: left;
+  padding: 14px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  background: #fff;
+  font-size: 0.95rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.sg-option:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: #fffbeb;
+}
+
+.sg-option.selected {
+  border-color: var(--accent);
+  background: #fffbeb;
+}
+
+.sg-option.correct {
+  border-color: #22c55e;
+  background: #f0fdf4;
+  color: #166534;
+}
+
+.sg-option.wrong {
+  border-color: #ef4444;
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.sg-option:disabled {
+  cursor: default;
+}
+
+.sg-option-letter {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+
+.sg-option.correct .sg-option-letter { background: #22c55e; color: #fff; }
+.sg-option.wrong .sg-option-letter { background: #ef4444; color: #fff; }
+
+.sg-feedback {
+  margin-top: 20px;
+  padding: 16px;
+  border-radius: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-weight: 600;
+}
+
+.sg-feedback.correct {
+  background: #f0fdf4;
+  color: #166534;
+  border: 1px solid #86efac;
+}
+
+.sg-feedback.wrong {
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+}
+
+.sg-quit {
+  margin-top: 20px;
+  background: none;
+  border: none;
+  color: var(--gray);
+  font-size: 0.88rem;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.sg-quit:hover { color: var(--primary); }
+
+/* Finish */
+.sg-finish {
+  text-align: center;
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.sg-score-ring {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: conic-gradient(var(--accent) calc(var(--pct) * 1%), #e2e8f0 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+}
+
+.sg-score-inner {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.sg-score-inner strong {
+  font-size: 2rem;
+  color: var(--primary);
+  line-height: 1;
+}
+
+.sg-score-inner span {
+  font-size: 0.88rem;
+  color: var(--gray);
+  margin-top: 4px;
+}
+
+.sg-finish h2 {
+  font-size: 1.5rem;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.sg-finish p {
+  color: var(--gray);
+  margin-bottom: 8px;
+}
+
+.sg-best-streak {
+  color: #ea580c !important;
+  font-weight: 600;
+}
+
+.sg-finish-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+@media (max-width: 768px) {
+  .sg-question-card {
+    padding: 20px 16px;
+  }
+
+  .sg-subject-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

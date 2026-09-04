@@ -7,6 +7,7 @@ const NAV = [
   { to: '/#programs', label: 'Programs', hash: true },
   { to: '/gallery', label: 'Gallery' },
   { to: '/downloads', label: 'Downloads' },
+  { to: '/study-game', label: 'Study Game' },
   { to: '/teachers-day', label: "Teacher's Day" },
   { to: '/#reviews', label: 'Reviews', hash: true },
   { to: '/#contact', label: 'Contact', hash: true },
