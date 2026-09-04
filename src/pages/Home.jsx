@@ -328,10 +328,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="query" className="section query-section">
+      <section id="query" className="section query-section query-section--modern">
         <div className="container">
           <SectionTitle title="Admission Query" subtitle="Fill the form to enroll or ask any question" />
           <div className="query-box">
+            <div className="query-box-icon" aria-hidden="true"><i className="fas fa-graduation-cap" /></div>
             <h3>Ready to Join Vidya Coachings?</h3>
             <p>Submit your admission query online and our team will get back to you shortly.</p>
             <div className="query-actions">
