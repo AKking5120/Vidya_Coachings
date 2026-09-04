@@ -191,7 +191,11 @@ export default function Header({ menuOpen, setMenuOpen }) {
         aria-hidden="true"
       />
 
-      <aside className={`mobile-menu ${menuOpen ? 'active' : ''}`} aria-label="Mobile navigation">
+      <aside
+        className={`mobile-menu ${menuOpen ? 'active' : ''}`}
+        aria-label="Mobile navigation"
+        aria-hidden={!menuOpen}
+      >
         <div className="mobile-menu-head">
           <span className="mobile-menu-title">Menu</span>
           <button type="button" className="mobile-close" onClick={closeMenu} aria-label="Close menu">
