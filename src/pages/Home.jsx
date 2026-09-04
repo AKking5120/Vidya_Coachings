@@ -265,35 +265,64 @@ export default function Home() {
 
       <ReviewsSection />
 
-      <section id="contact" className="section contact-section">
+      <section id="contact" className="section contact-section contact-section--modern">
         <div className="container">
           <SectionTitle title="Contact & Location" subtitle="Get in touch with us for admissions" />
-          <div className="contact-container">
-            <div className="contact-info">
-              <div className="contact-item">
-                <i className="fas fa-phone-alt" />
-                <div><h4>Call Us</h4><a href={`tel:${SITE.phone.replace(/\s/g, '')}`} className="phone">{SITE.phone}</a></div>
+          <div className="contact-layout">
+            <div className="contact-cards">
+              <a href={`tel:${SITE.phone.replace(/\s/g, '')}`} className="contact-card">
+                <div className="contact-card-icon contact-card-icon--phone"><i className="fas fa-phone-alt" /></div>
+                <div className="contact-card-body">
+                  <span className="contact-card-label">Call Us</span>
+                  <strong>{SITE.phone}</strong>
+                </div>
+              </a>
+              <a href={`https://mail.google.com/mail/?view=cm&fs=1&to=${SITE.email}`} target="_blank" rel="noopener noreferrer" className="contact-card">
+                <div className="contact-card-icon contact-card-icon--email"><i className="fas fa-envelope" /></div>
+                <div className="contact-card-body">
+                  <span className="contact-card-label">Email</span>
+                  <strong>{SITE.email}</strong>
+                </div>
+              </a>
+              <div className="contact-card">
+                <div className="contact-card-icon contact-card-icon--user"><i className="fas fa-user-tie" /></div>
+                <div className="contact-card-body">
+                  <span className="contact-card-label">Founder</span>
+                  <strong>{SITE.founder}</strong>
+                </div>
               </div>
-              <div className="contact-item">
-                <i className="fas fa-envelope" />
-                <div><h4>Email</h4><a href={`https://mail.google.com/mail/?view=cm&fs=1&to=${SITE.email}`} target="_blank" rel="noopener noreferrer" className="phone">{SITE.email}</a></div>
-              </div>
-              <div className="contact-item">
-                <i className="fas fa-user" />
-                <div><h4>Founder</h4><p>{SITE.founder}</p></div>
-              </div>
-              <div className="contact-item">
-                <i className="fas fa-clock" />
-                <div><h4>Working Hours</h4><p>Mon - Sat: 8:00 AM - 8:00 PM</p></div>
+              <div className="contact-card">
+                <div className="contact-card-icon contact-card-icon--clock"><i className="fas fa-clock" /></div>
+                <div className="contact-card-body">
+                  <span className="contact-card-label">Working Hours</span>
+                  <strong>Mon – Sat: 8 AM – 8 PM</strong>
+                </div>
               </div>
             </div>
-            <div className="map-container">
-              <iframe
-                title="Vidya Coachings Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1047.8901432744397!2d77.33197387925534!3d28.500863450614204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce7568fc4654d%3A0xb946b5623192dfc1!2sVidya%20Coachings%202.0!5e1!3m2!1sen!2sin!4v1779817310499!5m2!1sen!2sin"
-                width="600" height="450" style={{ border: 0 }} allowFullScreen loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
+            <div className="contact-map-card">
+              <div className="contact-map-header">
+                <i className="fas fa-map-marker-alt" />
+                <div>
+                  <strong>Vidya 2.0 (Main Branch)</strong>
+                  <span>Badarpur, New Delhi</span>
+                </div>
+              </div>
+              <div className="map-container">
+                <iframe
+                  title="Vidya Coachings Location"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1047.8901432744397!2d77.33197387925534!3d28.500863450614204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce7568fc4654d%3A0xb946b5623192dfc1!2sVidya%20Coachings%202.0!5e1!3m2!1sen!2sin!4v1779817310499!5m2!1sen!2sin"
+                  width="600" height="450" style={{ border: 0 }} allowFullScreen loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+              <div className="contact-map-actions">
+                <a href={`tel:${SITE.phone.replace(/\s/g, '')}`} className="btn btn-primary btn-sm">
+                  <i className="fas fa-phone" /> Call Now
+                </a>
+                <a href={`https://wa.me/${SITE.phoneRaw}`} target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp btn-sm">
+                  <i className="fab fa-whatsapp" /> WhatsApp
+                </a>
+              </div>
             </div>
           </div>
         </div>
