@@ -503,6 +503,7 @@ nav {
 .hero h1 .highlight {
     color: var(--primary-dark);
     white-space: nowrap;
+    font-weight: 900;
 }
 
 .hero-tagline {

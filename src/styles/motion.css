@@ -87,11 +87,26 @@ main {
   letter-spacing: -0.03em;
 }
 
-.highlight {
+/* Gradient highlight — not used on home hero (yellow bg needs solid contrast) */
+.page-hero .highlight,
+.section-heading .highlight {
   background: linear-gradient(135deg, var(--accent), #fbbf24);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.hero h1 .highlight {
+  display: inline-block;
+  color: var(--primary-dark);
+  background: rgba(255, 255, 255, 0.72);
+  -webkit-background-clip: border-box;
+  -webkit-text-fill-color: var(--primary-dark);
+  background-clip: border-box;
+  padding: 0.06em 0.45em;
+  border-radius: 14px;
+  border: 1px solid rgba(30, 58, 95, 0.14);
+  box-shadow: 0 4px 20px rgba(30, 58, 95, 0.1);
 }
 
 /* ── Hero enhancements ── */
