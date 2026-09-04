@@ -2,26 +2,12 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { SOCIAL, SITE } from '../data/constants';
 
-<<<<<<< HEAD
-const NAV = [
-  { to: '/', label: 'Home', end: true },
-  { to: '/#about', label: 'About', hash: true },
-  { to: '/#programs', label: 'Programs', hash: true },
-  { to: '/gallery', label: 'Gallery' },
-  { to: '/downloads', label: 'Downloads' },
-  { to: '/study-game', label: 'Study Game' },
-  { to: '/leaderboard', label: 'Leaderboard' },
-  { to: '/teachers-day', label: "Teacher's Day" },
-  { to: '/#reviews', label: 'Reviews', hash: true },
-  { to: '/#contact', label: 'Contact', hash: true },
-=======
 const NAV_MAIN = [
   { to: '/', label: 'Home', end: true, icon: 'fas fa-home' },
   { to: '/#about', label: 'About', hash: true, icon: 'fas fa-info-circle' },
   { to: '/#programs', label: 'Programs', hash: true, icon: 'fas fa-book' },
   { to: '/gallery', label: 'Gallery', icon: 'fas fa-images' },
   { to: '/downloads', label: 'Downloads', icon: 'fas fa-download' },
->>>>>>> cursor/study-game-7047
 ];
 
 const NAV_MORE = [
