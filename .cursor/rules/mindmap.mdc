@@ -1,0 +1,15 @@
+---
+description: Project mind map — read before any code changes
+alwaysApply: true
+---
+
+Before editing this repository, read **`MINDMAP.md`** at the project root.
+
+That file is the single source of truth for:
+- Architecture and tech stack
+- Routes and key files
+- Data flows (gallery, reviews, teachers, admin)
+- Conventions (image paths, styling, env vars)
+- Known issues and workflows
+
+Follow `MINDMAP.md` unless the user explicitly asks for something different.
