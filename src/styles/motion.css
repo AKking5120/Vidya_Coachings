@@ -1,0 +1,426 @@
+/* ============================================
+   VIDYA COACHINGS — Site-wide Motion & Style
+   ============================================ */
+
+/* ── Base polish ── */
+body {
+  background: #f8fafc;
+  background-image:
+    radial-gradient(circle at 15% 10%, rgba(245, 158, 11, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 85% 90%, rgba(30, 58, 95, 0.04) 0%, transparent 40%);
+}
+
+main {
+  overflow-x: hidden;
+}
+
+/* Alternating section backgrounds */
+.section:nth-of-type(even),
+.about-section,
+.locations-section,
+.social-section {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.team-section,
+.programs-section,
+.contact-section {
+  background: #fff;
+}
+
+.stats-section {
+  background: linear-gradient(135deg, var(--primary) 0%, #1e3a5f 50%, #0f172a 100%) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.stats-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* ── Scroll reveal ── */
+.motion-reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--motion-delay, 0s);
+}
+
+.motion-reveal.motion-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero loads immediately */
+.hero-content > .motion-reveal {
+  opacity: 1;
+  transform: none;
+  animation: heroFadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--motion-delay, 0s) + 0.1s);
+}
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-hero .container > .motion-reveal {
+  animation: heroFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--motion-delay, 0s) + 0.05s);
+}
+
+/* ── Typography ── */
+.section-heading,
+.hero h1,
+.page-hero h1 {
+  letter-spacing: -0.03em;
+}
+
+.highlight {
+  background: linear-gradient(135deg, var(--accent), #fbbf24);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Hero enhancements ── */
+.hero {
+  position: relative;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-badge {
+  animation: badgePulse 3s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.3); }
+  50% { box-shadow: 0 0 0 8px rgba(245, 158, 11, 0); }
+}
+
+.hero-features span {
+  transition: transform 0.25s, background 0.25s;
+}
+
+.hero-features span:hover {
+  transform: translateY(-2px);
+  background: rgba(245, 158, 11, 0.12);
+}
+
+/* ── Buttons shine ── */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-primary:hover::after {
+  left: 120%;
+}
+
+.btn {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease !important;
+}
+
+.btn:active {
+  transform: scale(0.97) !important;
+}
+
+/* ── Cards glass & hover ── */
+.team-card,
+.director-card,
+.feature-box,
+.location-card,
+.review-card,
+.download-card,
+.contact-item {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.team-card::before,
+.feature-box::before,
+.location-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, transparent, rgba(245, 158, 11, 0.2), transparent);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.team-card,
+.feature-box,
+.location-card {
+  position: relative;
+}
+
+.team-card:hover::before,
+.feature-box:hover::before,
+.location-card:hover::before {
+  opacity: 1;
+}
+
+.stat-box {
+  transition: transform 0.35s ease, background 0.35s ease !important;
+}
+
+.stat-box:hover {
+  transform: translateY(-6px) scale(1.02);
+  background: rgba(255, 255, 255, 0.14) !important;
+}
+
+.stat-box h2 {
+  background: linear-gradient(135deg, #fff, #fbbf24);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Feature icons bounce */
+.feature-icon {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.feature-box:hover .feature-icon {
+  transform: scale(1.12) rotate(-4deg);
+}
+
+.team-avatar {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.team-card:hover .team-avatar {
+  transform: scale(1.08);
+  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.25);
+}
+
+/* ── Section titles ── */
+.page-section-head {
+  position: relative;
+}
+
+.section-eyebrow {
+  animation: eyebrowShine 4s ease-in-out infinite;
+}
+
+@keyframes eyebrowShine {
+  0%, 100% { box-shadow: 0 0 0 rgba(245, 158, 11, 0); }
+  50% { box-shadow: 0 0 20px rgba(245, 158, 11, 0.15); }
+}
+
+/* ── Contact & map ── */
+.contact-item {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s !important;
+}
+
+.contact-item:hover {
+  transform: translateX(6px);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08) !important;
+}
+
+.map-container {
+  border-radius: 20px !important;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.12) !important;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.map-container:hover {
+  transform: scale(1.01);
+  box-shadow: 0 16px 48px rgba(15, 23, 42, 0.15) !important;
+}
+
+/* ── Query box glow ── */
+.query-box {
+  position: relative;
+  overflow: hidden;
+}
+
+.query-box::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.08) 0%, transparent 50%);
+  animation: queryGlow 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes queryGlow {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(10%, 10%); }
+}
+
+/* ── Page heroes (inner pages) ── */
+.page-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.page-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to top, #f8fafc, transparent);
+  pointer-events: none;
+}
+
+.page-hero-badge {
+  animation: heroFadeUp 0.6s ease both;
+}
+
+/* ── Gallery & downloads ── */
+.gallery-item,
+.download-card {
+  transition: transform 0.35s ease, box-shadow 0.35s ease !important;
+}
+
+.gallery-item:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.15) !important;
+}
+
+.tab-btn {
+  transition: all 0.25s ease !important;
+}
+
+.tab-btn.active {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.25);
+}
+
+/* ── Footer ── */
+footer {
+  position: relative;
+  overflow: hidden;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), #fbbf24, var(--primary), var(--accent));
+  background-size: 200% 100%;
+  animation: footerGradient 4s linear infinite;
+}
+
+@keyframes footerGradient {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.footer-logo span {
+  background: linear-gradient(135deg, var(--accent), #fbbf24);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.footer-links a,
+.footer-contact a {
+  transition: color 0.2s, transform 0.2s;
+  display: inline-block;
+}
+
+.footer-links a:hover,
+.footer-contact a:hover {
+  color: var(--accent) !important;
+  transform: translateX(4px);
+}
+
+/* ── WhatsApp float pulse ── */
+.whatsapp-float {
+  animation: waPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes waPulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+  50% { box-shadow: 0 4px 30px rgba(37, 211, 102, 0.7), 0 0 0 12px rgba(37, 211, 102, 0); }
+}
+
+/* ── Scroll to top ── */
+.scroll-top {
+  transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.scroll-top:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.4) !important;
+}
+
+/* ── Form inputs focus ── */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15) !important;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .motion-reveal,
+  .hero-content > .motion-reveal,
+  .page-hero .container > .motion-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .hero-badge,
+  .section-eyebrow,
+  .whatsapp-float,
+  footer::before,
+  .query-box::before {
+    animation: none !important;
+  }
+
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}

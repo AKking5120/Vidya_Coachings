@@ -5,6 +5,7 @@ import Footer from './Footer';
 import WhatsAppFloat from './WhatsAppFloat';
 import ScrollTop from './ScrollTop';
 import NoticeBanner from './NoticeBanner';
+import ScrollReveal from './ScrollReveal';
 
 export default function Layout() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -19,6 +20,7 @@ export default function Layout() {
     <>
       <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       <NoticeBanner />
+      <ScrollReveal />
       <main>
         <Outlet />
       </main>
