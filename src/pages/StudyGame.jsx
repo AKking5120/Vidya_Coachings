@@ -1,13 +1,17 @@
 import { useState, useEffect, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import {
   STUDY_LEVELS,
   STUDY_SUBJECTS,
   getQuestions,
+  getQuestionCount,
   getScoreMessage,
 } from '../data/studyGameData';
+import { submitQuizScore, isSupabaseConfigured } from '../lib/supabase';
 
 const QUESTION_COUNT = 10;
 const TIME_PER_QUESTION = 30;
+const PLAYER_NAME_KEY = 'vidya_quiz_player_name';
 
 function shuffleOptions(question) {
   const indexed = question.options.map((opt, i) => ({ opt, i }));
@@ -32,6 +36,10 @@ export default function StudyGame() {
   const [streak, setStreak] = useState(0);
   const [bestStreak, setBestStreak] = useState(0);
   const [shuffledQs, setShuffledQs] = useState([]);
+  const [playerName, setPlayerName] = useState(() => localStorage.getItem(PLAYER_NAME_KEY) || '');
+  const [scoreSaved, setScoreSaved] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState('');
 
   const q = questions[current];
   const shuffled = shuffledQs[current] || null;
@@ -50,7 +58,39 @@ export default function StudyGame() {
     setStreak(0);
     setBestStreak(0);
     setShuffledQs(qs.map(shuffleOptions));
+    setScoreSaved(false);
+    setSaveError('');
     setScreen('quiz');
+  };
+
+  const handleSaveScore = async () => {
+    if (!playerName.trim()) {
+      setSaveError('Please enter your name.');
+      return;
+    }
+    if (!isSupabaseConfigured) {
+      setSaveError('Supabase not configured. Leaderboard unavailable.');
+      return;
+    }
+    setSaving(true);
+    setSaveError('');
+    try {
+      localStorage.setItem(PLAYER_NAME_KEY, playerName.trim());
+      await submitQuizScore({
+        playerName: playerName.trim(),
+        level,
+        subject,
+        score,
+        totalQuestions: questions.length,
+        percent,
+        bestStreak,
+      });
+      setScoreSaved(true);
+    } catch {
+      setSaveError('Could not save score. Run supabase/quiz-scores.sql in Supabase.');
+    } finally {
+      setSaving(false);
+    }
   };
 
   const handleAnswer = useCallback((index) => {
@@ -111,6 +151,9 @@ export default function StudyGame() {
           <div className="page-hero-badge"><i className="fas fa-gamepad" /> Learn &amp; Play</div>
           <h1>Study Game</h1>
           <p>Test your knowledge with fun quizzes — Math, Science, English &amp; GK</p>
+          <Link to="/leaderboard" className="btn btn-outline" style={{ marginTop: 12, color: '#fff', borderColor: 'rgba(255,255,255,0.5)' }}>
+            <i className="fas fa-trophy" /> View Leaderboard
+          </Link>
         </div>
       </section>
 
@@ -121,7 +164,7 @@ export default function StudyGame() {
               <div className="page-section-head">
                 <span className="section-eyebrow">Choose Your Quiz</span>
                 <h2 className="section-heading">Pick class &amp; subject</h2>
-                <p className="section-subtitle">10 questions · 30 seconds each · Instant score</p>
+                <p className="section-subtitle">10 questions · 30 seconds each · 20+ questions per subject</p>
               </div>
 
               {STUDY_LEVELS.map((lvl) => (
@@ -139,7 +182,7 @@ export default function StudyGame() {
                       >
                         <i className={sub.icon} />
                         <span>{sub.label}</span>
-                        <small>Start Quiz</small>
+                        <small>{getQuestionCount(lvl.id, sub.id)} questions</small>
                       </button>
                     ))}
                   </div>
@@ -231,6 +274,36 @@ export default function StudyGame() {
               {bestStreak >= 2 && (
                 <p className="sg-best-streak"><i className="fas fa-fire" /> Best streak: {bestStreak} correct in a row</p>
               )}
+
+              {!scoreSaved && (
+                <div className="sg-save-score">
+                  <label htmlFor="playerName">Save to Leaderboard</label>
+                  <div className="sg-save-row">
+                    <input
+                      id="playerName"
+                      type="text"
+                      value={playerName}
+                      onChange={(e) => setPlayerName(e.target.value)}
+                      placeholder="Enter your name"
+                      maxLength={40}
+                    />
+                    <button
+                      type="button"
+                      className="btn btn-primary btn-sm"
+                      onClick={handleSaveScore}
+                      disabled={saving}
+                    >
+                      {saving ? 'Saving...' : 'Submit Score'}
+                    </button>
+                  </div>
+                  {saveError && <p className="sg-save-error">{saveError}</p>}
+                </div>
+              )}
+
+              {scoreSaved && (
+                <p className="sg-saved-msg"><i className="fas fa-check-circle" /> Score saved to leaderboard!</p>
+              )}
+
               <div className="sg-finish-actions">
                 <button
                   type="button"
@@ -242,6 +315,9 @@ export default function StudyGame() {
                 <button type="button" className="btn btn-outline" onClick={reset}>
                   <i className="fas fa-th" /> Choose Another Quiz
                 </button>
+                <Link to="/leaderboard" className="btn btn-outline">
+                  <i className="fas fa-trophy" /> Leaderboard
+                </Link>
               </div>
             </div>
           )}

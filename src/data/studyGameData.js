@@ -1,3 +1,5 @@
+import { EXTRA_QUESTIONS } from './studyGameExtra';
+
 export const STUDY_LEVELS = [
   { id: 'primary', label: 'Class 1–8', icon: 'fas fa-child', color: 'orange' },
   { id: 'secondary', label: 'Class 9–10', icon: 'fas fa-book-open', color: 'blue' },
@@ -11,7 +13,20 @@ export const STUDY_SUBJECTS = [
   { id: 'gk', label: 'GK', icon: 'fas fa-globe-asia' },
 ];
 
-export const QUIZ_QUESTIONS = {
+function mergeQuestions(base, extra) {
+  const merged = { primary: {}, secondary: {}, senior: {} };
+  for (const level of ['primary', 'secondary', 'senior']) {
+    for (const subject of ['math', 'science', 'english', 'gk']) {
+      merged[level][subject] = [
+        ...(base[level]?.[subject] || []),
+        ...(extra[level]?.[subject] || []),
+      ];
+    }
+  }
+  return merged;
+}
+
+const BASE_QUESTIONS = {
   primary: {
     math: [
       { q: 'What is 15 + 27?', options: ['32', '42', '52', '62'], answer: 1 },
@@ -163,6 +178,12 @@ export const QUIZ_QUESTIONS = {
     ],
   },
 };
+
+export const QUIZ_QUESTIONS = mergeQuestions(BASE_QUESTIONS, EXTRA_QUESTIONS);
+
+export function getQuestionCount(level, subject) {
+  return QUIZ_QUESTIONS[level]?.[subject]?.length || 0;
+}
 
 export function getQuestions(level, subject, count = 10) {
   const pool = QUIZ_QUESTIONS[level]?.[subject] || [];
