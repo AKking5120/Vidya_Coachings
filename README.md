@@ -6,7 +6,8 @@ Modern React website for Vidya Coachings tuition centre with Supabase reviews an
 
 - **React + Vite** — Fast, modern single-page app
 - **Supabase** — Reviews stored in database (replaces Google Sheets)
-- **Admin Panel** (`/admin`) — Approve reviews & add gallery photos via GitHub paths
+- **Admin Panel** (`/admin`) — Approve reviews, add gallery photos, publish alerts & notices
+- **Alerts & Notices** — Banner at top of site; manage from admin panel
 - **GitHub Images** — New photos stored in repo; admin enters path, site loads from GitHub raw URL
 - **Hardcoded Gallery** — All existing photos remain as-is in the codebase
 
