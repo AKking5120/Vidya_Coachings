@@ -1,5 +1,7 @@
 # Vidya Coachings — React + Supabase
 
+> **AI / developers:** Read [`MINDMAP.md`](./MINDMAP.md) first — project architecture, routes, and conventions.
+
 Modern React website for Vidya Coachings tuition centre with Supabase reviews and GitHub-hosted gallery photos.
 
 ## Features
