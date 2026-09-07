@@ -584,4 +584,330 @@
   .sg-save-row {
     flex-direction: column;
   }
+
+  .sg-game-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mg-memory-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .mg-memory-back {
+    font-size: 0.65rem;
+  }
+}
+
+/* ── Game Hub & Mini Games ── */
+.sg-game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 18px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.sg-game-card {
+  background: #fff;
+  border: 2px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 22px 20px;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sg-game-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.1);
+}
+
+.sg-game-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin-bottom: 4px;
+}
+
+.sg-game-card h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin: 0;
+}
+
+.sg-game-card p {
+  font-size: 0.85rem;
+  color: var(--gray);
+  margin: 0;
+  flex: 1;
+}
+
+.sg-game-card-play {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-top: 4px;
+}
+
+.sg-game-card--purple .sg-game-card-icon { background: #ede9fe; color: #7c3aed; }
+.sg-game-card--purple:hover { border-color: #a78bfa; }
+.sg-game-card--orange .sg-game-card-icon { background: #ffedd5; color: #ea580c; }
+.sg-game-card--orange:hover { border-color: #fdba74; }
+.sg-game-card--blue .sg-game-card-icon { background: #dbeafe; color: #2563eb; }
+.sg-game-card--blue:hover { border-color: #93c5fd; }
+.sg-game-card--green .sg-game-card-icon { background: #dcfce7; color: #16a34a; }
+.sg-game-card--green:hover { border-color: #86efac; }
+.sg-game-card--teal .sg-game-card-icon { background: #ccfbf1; color: #0d9488; }
+.sg-game-card--teal:hover { border-color: #5eead4; }
+
+.mg-game {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.mg-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: var(--gray);
+  font-size: 0.88rem;
+  font-family: inherit;
+  cursor: pointer;
+  margin-bottom: 16px;
+  padding: 0;
+}
+
+.mg-back:hover {
+  color: var(--primary);
+}
+
+.mg-intro {
+  text-align: center;
+  padding: 40px 24px;
+  background: #fff;
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.06);
+}
+
+.mg-intro i {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.mg-intro h2 {
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.mg-intro p {
+  color: var(--gray);
+  margin-bottom: 24px;
+}
+
+.mg-intro--orange i { color: #ea580c; }
+.mg-intro--blue i { color: #2563eb; }
+.mg-intro--green i { color: #16a34a; }
+.mg-intro--teal i { color: #0d9488; }
+
+.mg-stats-bar {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 0.9rem;
+}
+
+.mg-urgent {
+  color: #dc2626 !important;
+}
+
+.mg-finish {
+  text-align: center;
+  padding: 32px 20px;
+}
+
+.mg-finish h2 {
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.mg-finish-score {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--accent);
+  margin: 12px 0;
+}
+
+.mg-finish-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.mg-scramble-box {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.mg-scramble-letters {
+  display: block;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  color: var(--primary);
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  border: 2px dashed var(--accent);
+  margin-bottom: 10px;
+}
+
+.mg-progress-label {
+  text-align: center;
+  color: var(--gray);
+  font-size: 0.88rem;
+  margin-bottom: 16px;
+}
+
+.mg-next-btn {
+  display: block;
+  margin: 20px auto 0;
+}
+
+.mg-tf-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.mg-tf-btn {
+  padding: 18px;
+  border-radius: 14px;
+  border: 2px solid #e2e8f0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.mg-tf-btn--true {
+  background: #f0fdf4;
+  color: #166534;
+}
+
+.mg-tf-btn--false {
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.mg-tf-btn.correct {
+  border-color: #22c55e;
+  background: #dcfce7;
+}
+
+.mg-tf-btn.wrong {
+  border-color: #ef4444;
+  opacity: 0.7;
+}
+
+.mg-tf-feedback {
+  text-align: center;
+  margin-top: 16px;
+  font-weight: 600;
+}
+
+.mg-tf-feedback.correct { color: #166534; }
+.mg-tf-feedback.wrong { color: #991b1b; }
+
+.mg-memory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.mg-memory-card {
+  aspect-ratio: 1;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+  background: linear-gradient(135deg, #312e81, #4c1d95);
+  cursor: pointer;
+  font-family: inherit;
+  position: relative;
+  overflow: hidden;
+  padding: 6px;
+  transition: transform 0.2s;
+}
+
+.mg-memory-card:hover:not(.flipped) {
+  transform: scale(1.03);
+}
+
+.mg-memory-card.flipped,
+.mg-memory-card.matched {
+  background: #fff;
+  border-color: var(--accent);
+}
+
+.mg-memory-card.matched {
+  opacity: 0.65;
+}
+
+.mg-memory-front,
+.mg-memory-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--primary);
+  padding: 4px;
+}
+
+.mg-memory-front {
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.mg-memory-card:not(.flipped) .mg-memory-back {
+  display: none;
+}
+
+.mg-memory-card.flipped .mg-memory-front,
+.mg-memory-card.matched .mg-memory-front {
+  display: none;
+}
+
+.mg-win-msg {
+  text-align: center;
+  color: #16a34a;
+  font-weight: 700;
+  margin-top: 16px;
 }

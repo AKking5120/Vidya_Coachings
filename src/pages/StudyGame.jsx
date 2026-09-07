@@ -7,7 +7,12 @@ import {
   getQuestionCount,
   getScoreMessage,
 } from '../data/studyGameData';
+import { GAME_LIST } from '../data/miniGamesData';
 import { submitQuizScore, isSupabaseConfigured } from '../lib/supabase';
+import SpeedMathGame from '../components/games/SpeedMathGame';
+import WordScrambleGame from '../components/games/WordScrambleGame';
+import TrueFalseGame from '../components/games/TrueFalseGame';
+import MemoryMatchGame from '../components/games/MemoryMatchGame';
 
 const QUESTION_COUNT = 10;
 const TIME_PER_QUESTION = 30;
@@ -24,6 +29,7 @@ function shuffleOptions(question) {
 }
 
 export default function StudyGame() {
+  const [activeGame, setActiveGame] = useState(null);
   const [screen, setScreen] = useState('menu');
   const [level, setLevel] = useState(null);
   const [subject, setSubject] = useState(null);
@@ -139,6 +145,11 @@ export default function StudyGame() {
     setQuestions([]);
   };
 
+  const goHub = () => {
+    setActiveGame(null);
+    reset();
+  };
+
   const levelLabel = STUDY_LEVELS.find((l) => l.id === level)?.label;
   const subjectLabel = STUDY_SUBJECTS.find((s) => s.id === subject)?.label;
   const percent = questions.length ? Math.round((score / questions.length) * 100) : 0;
@@ -150,7 +161,7 @@ export default function StudyGame() {
         <div className="container">
           <div className="page-hero-badge"><i className="fas fa-gamepad" /> Learn &amp; Play</div>
           <h1>Study Game</h1>
-          <p>Test your knowledge with fun quizzes — Math, Science, English &amp; GK</p>
+          <p>5 fun learning games — Quiz, Speed Math, Word Scramble &amp; more!</p>
           <div className="study-game-hero-actions">
             <Link to="/leaderboard" className="btn btn-outline-light">
               <i className="fas fa-trophy" /> View Leaderboard
@@ -161,10 +172,48 @@ export default function StudyGame() {
 
       <section className="study-game-section">
         <div className="container">
-          {screen === 'menu' && (
+          {!activeGame && (
+            <div className="sg-hub">
+              <div className="page-section-head">
+                <span className="section-eyebrow">Game Zone</span>
+                <h2 className="section-heading">Pick a game</h2>
+                <p className="section-subtitle">Learn while you play — choose any game below</p>
+              </div>
+              <div className="sg-game-grid">
+                {GAME_LIST.map((game) => (
+                  <button
+                    key={game.id}
+                    type="button"
+                    className={`sg-game-card sg-game-card--${game.color}`}
+                    onClick={() => {
+                      if (game.id === 'quiz') {
+                        setActiveGame('quiz');
+                        setScreen('menu');
+                      } else {
+                        setActiveGame(game.id);
+                      }
+                    }}
+                  >
+                    <div className="sg-game-card-icon"><i className={game.icon} /></div>
+                    <h3>{game.title}</h3>
+                    <p>{game.desc}</p>
+                    <span className="sg-game-card-play">Play <i className="fas fa-arrow-right" /></span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {activeGame === 'speed-math' && <SpeedMathGame onBack={goHub} />}
+          {activeGame === 'word-scramble' && <WordScrambleGame onBack={goHub} />}
+          {activeGame === 'true-false' && <TrueFalseGame onBack={goHub} />}
+          {activeGame === 'memory' && <MemoryMatchGame onBack={goHub} />}
+
+          {activeGame === 'quiz' && screen === 'menu' && (
             <div className="sg-menu">
               <div className="page-section-head">
-                <span className="section-eyebrow">Choose Your Quiz</span>
+                <button type="button" className="mg-back" onClick={goHub}><i className="fas fa-arrow-left" /> All Games</button>
+                <span className="section-eyebrow">Quiz Challenge</span>
                 <h2 className="section-heading">Pick class &amp; subject</h2>
                 <p className="section-subtitle">10 questions · 30 seconds each · 20+ questions per subject</p>
               </div>
@@ -193,7 +242,7 @@ export default function StudyGame() {
             </div>
           )}
 
-          {screen === 'quiz' && shuffled && (
+          {activeGame === 'quiz' && screen === 'quiz' && shuffled && (
             <div className="sg-quiz">
               <div className="sg-quiz-header">
                 <div className="sg-quiz-meta">
@@ -263,7 +312,7 @@ export default function StudyGame() {
             </div>
           )}
 
-          {screen === 'finish' && (
+          {activeGame === 'quiz' && screen === 'finish' && (
             <div className="sg-finish">
               <div className="sg-score-ring" style={{ '--pct': percent }}>
                 <div className="sg-score-inner">
@@ -314,8 +363,8 @@ export default function StudyGame() {
                 >
                   <i className="fas fa-redo" /> Play Again
                 </button>
-                <button type="button" className="btn btn-outline" onClick={reset}>
-                  <i className="fas fa-th" /> Choose Another Quiz
+                <button type="button" className="btn btn-outline" onClick={goHub}>
+                  <i className="fas fa-th" /> All Games
                 </button>
                 <Link to="/leaderboard" className="btn btn-outline">
                   <i className="fas fa-trophy" /> Leaderboard
