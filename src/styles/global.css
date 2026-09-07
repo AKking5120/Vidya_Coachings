@@ -281,6 +281,31 @@ header.site-header.scrolled .logo-img {
   white-space: nowrap;
 }
 
+.nav-contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  font-size: 0.88rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s, background 0.2s;
+}
+
+.nav-contact-link:hover {
+  color: var(--accent);
+  background: rgba(245, 158, 11, 0.1);
+}
+
+@media (max-width: 1280px) {
+  .nav-contact-link {
+    display: none;
+  }
+}
+
 .header-social a {
   width: 34px;
   height: 34px;

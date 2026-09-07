@@ -172,6 +172,15 @@ export default function StudyGame() {
 
       <section className="study-game-section">
         <div className="container">
+          {activeGame && (
+            <div className="sg-game-toolbar">
+              <button type="button" className="mg-back mg-back--bar" onClick={goHub}>
+                <i className="fas fa-arrow-left" aria-hidden="true" />
+                <span>All Games</span>
+              </button>
+            </div>
+          )}
+
           {!activeGame && (
             <div className="sg-hub">
               <div className="page-section-head">

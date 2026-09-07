@@ -158,6 +158,10 @@ export default function Header({ menuOpen, setMenuOpen }) {
             </ul>
 
             <div className="nav-actions">
+              <a href="/#contact" className="nav-contact-link" title="Contact">
+                <i className="fas fa-phone-alt" aria-hidden="true" />
+                <span>Contact</span>
+              </a>
               <div className="header-social">
                 {SOCIAL.slice(0, 3).map((s) => (
                   <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" title={s.label}>
