@@ -8,8 +8,8 @@ export const SITE = {
 };
 
 export const SOCIAL = [
-  { href: 'https://www.facebook.com/share/1BQUxhnAGN/', icon: 'fab fa-facebook-f', label: 'Facebook', className: 'facebook' },
-  { href: 'https://www.instagram.com/vidya_coachings?utm_source=qr&igsh=OXMxMTI1c21mYWZ5', icon: 'fab fa-instagram', label: 'Instagram', className: 'instagram' },
+  { href: 'https://www.facebook.com/share/1FQRnJZqBc/', icon: 'fab fa-facebook-f', label: 'Facebook', className: 'facebook' },
+  { href: 'https://www.instagram.com/amarpalsaini_ap?igsi=ajAxb2gzNmlyenZn', icon: 'fab fa-instagram', label: 'Instagram', className: 'instagram' },
   { href: 'https://www.youtube.com/@vidyacoachings', icon: 'fab fa-youtube', label: 'YouTube', className: 'youtube' },
   { href: 'https://x.com/vidyacoachings', icon: 'fab fa-x-twitter', label: 'X', className: 'x-twitter' },
   { href: 'https://wa.me/919871749012', icon: 'fab fa-whatsapp', label: 'WhatsApp', className: 'whatsapp' },
