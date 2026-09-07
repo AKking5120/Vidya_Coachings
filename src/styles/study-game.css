@@ -57,6 +57,36 @@
   margin-bottom: 36px;
 }
 
+.sg-game-toolbar {
+  margin-bottom: 20px;
+}
+
+.study-game-section .sg-game-toolbar ~ .sg-menu .mg-back,
+.study-game-section .sg-game-toolbar ~ * .mg-game > .mg-back:first-child {
+  display: none;
+}
+
+.mg-back--bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  color: var(--primary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+  margin-bottom: 0;
+}
+
+.mg-back--bar:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: #fffbeb;
+}
+
 .sg-level-block {
   margin-bottom: 40px;
 }
@@ -681,8 +711,9 @@
   gap: 8px;
   background: none;
   border: none;
-  color: var(--gray);
+  color: var(--primary);
   font-size: 0.88rem;
+  font-weight: 600;
   font-family: inherit;
   cursor: pointer;
   margin-bottom: 16px;
