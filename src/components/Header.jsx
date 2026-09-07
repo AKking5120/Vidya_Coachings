@@ -155,7 +155,6 @@ export default function Header({ menuOpen, setMenuOpen }) {
                 <NavItem key={item.label} item={item} />
               ))}
               <MoreDropdown />
-              <NavItem item={NAV_CONTACT} />
             </ul>
 
             <div className="nav-actions">
