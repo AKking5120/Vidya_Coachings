@@ -123,7 +123,10 @@ export default function Home() {
         <div className="container">
           <div className="hero-content">
             <div className="hero-badge"><i className="fas fa-calendar-check" /> Established {SITE.established}</div>
-            <h1>Expert Tuition for <span className="highlight">Class 1 to 12</span></h1>
+            <h1>
+              Expert Tuition for
+              <span className="highlight">Class 1 to 12</span>
+            </h1>
             <p className="hero-tagline">&ldquo;A Name of Trust for Quality Education & Lifelong Learning&rdquo;</p>
             <div className="hero-features">
               <span><i className="fas fa-language" /> Hindi & English Medium</span>

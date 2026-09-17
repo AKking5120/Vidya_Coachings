@@ -111,8 +111,11 @@ main {
 
 @media (max-width: 768px) {
   .hero h1 .highlight {
-    display: inline;
-    padding: 0.04em 0.35em;
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0.35em auto 0;
+    padding: 0.12em 0.5em;
   }
 }
 
@@ -175,7 +178,6 @@ main {
 
 /* ── Cards glass & hover ── */
 .team-card,
-.director-card,
 .feature-box,
 .location-card,
 .review-card,
@@ -183,6 +185,16 @@ main {
   background: rgba(255, 255, 255, 0.95) !important;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+}
+
+.director-card {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark)) !important;
+  color: #fff !important;
+}
+
+.director-card h3,
+.director-card .subject {
+  color: #fff !important;
 }
 
 .team-card::before,

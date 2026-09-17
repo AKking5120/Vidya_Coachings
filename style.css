@@ -766,11 +766,13 @@ nav {
 .director-card h3 {
     font-size: 1.4rem;
     margin-bottom: 5px;
+    color: #fff;
 }
 
 .director-card .subject {
-    opacity: 0.9;
+    opacity: 0.95;
     margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.95);
 }
 
 .director-card a {
@@ -852,13 +854,13 @@ nav {
 }
 
 .team-card h4 {
-    color: var(--primary);
+    color: var(--primary) !important;
     font-size: 0.95rem;
     margin-bottom: 5px;
 }
 
 .team-card .subject {
-    color: var(--gray);
+    color: var(--gray) !important;
     font-size: 0.8rem;
     margin-bottom: 6px;
 }
