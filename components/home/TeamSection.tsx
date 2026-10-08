@@ -8,7 +8,7 @@ interface FacultyMember {
   name: string;
   subject: string;
   experience: string;
-  phone: string;
+  phone?: string;
   branches: string;
   color: string;
 }
@@ -34,28 +34,28 @@ const DIRECTOR: FacultyMember[] = _DIRECTOR_RAW.map((m, i) => ({ ...m, color: as
 
 const _SENIOR_RAW = [
   { initials: 'AS', name: 'Amarpal Saini Sir',  subject: '11th & 12th History, Economics, Sociology',  experience: '12+', phone: '9871749012', branches: 'Branch 1, 2 & 3' },
-  { initials: 'UG', name: 'Usman Ghani Sir',    subject: '11th & 12th Mathematics',                    experience: '14+', phone: '9871029057', branches: 'Branch 2' },
-  { initials: 'SH', name: 'Saddam Hussain Sir', subject: '11th & 12th Accountancy',                    experience: '6+',  phone: '9210129833', branches: 'Branch 2' },
-  { initials: 'AU', name: 'Aman Upadhyay Sir',  subject: '11th & 12th Physics & Chemistry',            experience: '6+',  phone: '8130150058', branches: 'Branch 2' },
-  { initials: 'VJ', name: 'Vivek Kr. Jha Sir',  subject: '11th & 12th Political Science',              experience: '3+',  phone: '9911382175', branches: 'Branch 2' },
+  { initials: 'UG', name: 'Usman Ghani Sir',    subject: '11th & 12th Mathematics',                    experience: '14+', branches: 'Branch 2' },
+  { initials: 'SH', name: 'Saddam Hussain Sir', subject: '11th & 12th Accountancy',                    experience: '6+',  branches: 'Branch 2' },
+  { initials: 'AU', name: 'Aman Upadhyay Sir',  subject: '11th & 12th Physics & Chemistry',            experience: '6+',  branches: 'Branch 2' },
+  { initials: 'VJ', name: 'Vivek Kr. Jha Sir',  subject: '11th & 12th Political Science',              experience: '3+',  branches: 'Branch 2' },
   { initials: 'MS', name: 'Mohit Singh Sir',    subject: '11th & 12th Geography',                      experience: '5+',  phone: '7827945038', branches: 'Branch 1, 2 & 3' },
-  { initials: 'FM', name: 'Fatma Mam',          subject: '9th–10th Natural Science | 11th–12th Biology',experience: '5+',  phone: '8448162535', branches: 'Branch 1 & 2' },
+  { initials: 'FM', name: 'Fatma Mam',          subject: '9th–10th Natural Science | 11th–12th Biology',experience: '5+',  branches: 'Branch 1 & 2' },
 ];
 const SENIOR: FacultyMember[] = _SENIOR_RAW.map((m, i) => ({ ...m, color: assignColor(i) }));
 
 const _SECONDARY_RAW = [
   { initials: 'AS', name: 'Amarpal Saini Sir', subject: '9th & 10th Social Studies', experience: '12+', phone: '9871749012', branches: 'Branch 1, 2 & 3' },
-  { initials: 'GS', name: 'Gaurav Singh Sir',  subject: '9th & 10th Mathematics',    experience: '5+',  phone: '8851338396', branches: 'Branch 1 & 2' },
-  { initials: 'FM', name: 'Fatma Mam',         subject: '9th & 10th Natural Science', experience: '5+', phone: '8448162535', branches: 'Branch 1 & 2' },
+  { initials: 'GS', name: 'Gaurav Singh Sir',  subject: '9th & 10th Mathematics',    experience: '5+',  branches: 'Branch 1 & 2' },
+  { initials: 'FM', name: 'Fatma Mam',         subject: '9th & 10th Natural Science', experience: '5+', branches: 'Branch 1 & 2' },
 ];
 const SECONDARY: FacultyMember[] = _SECONDARY_RAW.map((m, i) => ({ ...m, color: assignColor(i) }));
 
 const _PRIMARY_RAW = [
-  { initials: 'PG', name: 'Pooja Gupta Mam',  subject: '1st to 8th (All Subjects)', experience: '5+', phone: '7982531323', branches: 'Branch 1 & 3' },
-  { initials: 'GM', name: 'Gulnaz Mam',        subject: '1st to 8th (All Subjects)', experience: '3+', phone: '9718377598', branches: 'Branch 2' },
-  { initials: 'NK', name: 'Neetu Kumari Mam',  subject: '1st to 5th (All Subjects)', experience: '5+', phone: '8595916376', branches: 'Branch 1 & 3' },
-  { initials: 'RG', name: 'Riya Gupta Mam',    subject: '1st to 5th (All Subjects)', experience: '2+', phone: '7042916714', branches: 'Branch 1 & 3' },
-  { initials: 'BM', name: 'Bhawna Mam',        subject: '1st to 5th (All Subjects)', experience: '2+', phone: '8810298147', branches: 'Branch 1 & 3' },
+  { initials: 'PG', name: 'Pooja Gupta Mam',  subject: '1st to 8th (All Subjects)', experience: '5+',  branches: 'Branch 1 & 3' },
+  { initials: 'GM', name: 'Gulnaz Mam',        subject: '1st to 8th (All Subjects)', experience: '3+', branches: 'Branch 2' },
+  { initials: 'NK', name: 'Neetu Kumari Mam',  subject: '1st to 5th (All Subjects)', experience: '5+', branches: 'Branch 1 & 3' },
+  { initials: 'RG', name: 'Riya Gupta Mam',    subject: '1st to 5th (All Subjects)', experience: '2+', branches: 'Branch 1 & 3' },
+  { initials: 'BM', name: 'Bhawna Mam',        subject: '1st to 5th (All Subjects)', experience: '2+', branches: 'Branch 1 & 3' },
   { initials: 'MS', name: 'Mohit Singh Sir',   subject: '1st to 8th (All Subjects)', experience: '5+', phone: '7827945038', branches: 'Branch 1, 2 & 3' },
 ];
 const PRIMARY: FacultyMember[] = _PRIMARY_RAW.map((m, i) => ({ ...m, color: assignColor(i) }));
@@ -88,12 +88,14 @@ function FacultyCard({ member, index }: { member: FacultyMember; index: number }
         <Star size={11} className="text-amber-400 fill-amber-400" />
         <span>{member.experience} Yrs Experience</span>
       </div>
-      <a
-        href={`tel:+91${member.phone}`}
-        className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-700 transition-colors"
-      >
-        <Phone size={11} />{member.phone}
-      </a>
+      {member.phone && (
+        <a
+          href={`tel:+91${member.phone}`}
+          className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-700 transition-colors"
+        >
+          <Phone size={11} />{member.phone}
+        </a>
+      )}
       <span className="text-xs bg-amber-50 text-amber-700 border border-amber-200 px-2.5 py-0.5 rounded-full">
         {member.branches}
       </span>
@@ -159,9 +161,11 @@ export default function TeamSection() {
                   <Star size={11} className="text-amber-400 fill-amber-400" />
                   <span>{m.experience} Years Experience</span>
                 </div>
-                <a href={`tel:+91${m.phone}`} className="flex items-center gap-1 text-xs text-blue-600 hover:underline">
-                  <Phone size={11} /> {m.phone}
-                </a>
+                {m.phone && (
+                  <a href={`tel:+91${m.phone}`} className="flex items-center gap-1 text-xs text-blue-600 hover:underline">
+                    <Phone size={11} /> {m.phone}
+                  </a>
+                )}
                 <span className="text-xs bg-amber-50 text-amber-700 border border-amber-200 px-2.5 py-0.5 rounded-full">
                   {m.branches}
                 </span>
